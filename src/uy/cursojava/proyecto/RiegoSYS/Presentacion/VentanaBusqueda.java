@@ -4,6 +4,8 @@
  */
 package uy.cursojava.proyecto.RiegoSYS.Presentación;
 
+import uy.cursojava.proyecto.RiegoSYS.Presentacion.Inicio;
+
 /**
  *
  * @author rodrigo denis, rodrigo silveria, bruno rasetti
