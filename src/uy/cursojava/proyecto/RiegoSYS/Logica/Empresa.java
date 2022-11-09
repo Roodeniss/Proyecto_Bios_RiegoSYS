@@ -14,7 +14,6 @@ public class Empresa {
     /*         Atributos           */
     private Sistema listaEmpleados;
     private Sistema listaClientes;
-     int hola = 0;
     
     /*   Constructor      */
     public Empresa(){
