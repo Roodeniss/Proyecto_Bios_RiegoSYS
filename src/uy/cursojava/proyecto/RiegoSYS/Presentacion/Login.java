@@ -1,4 +1,4 @@
-package uy.cursojava.proyecto.RiegoSYS.Presentación;
+package uy.cursojava.proyecto.RiegoSYS.Presentacion;
 
 import uy.cursojava.proyecto.RiegoSYS.Presentacion.Inicio;
 

@@ -54,17 +54,19 @@
                   <Component id="jLabel2" min="-2" pref="78" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="emailCle" alignment="0" pref="246" max="32767" attributes="0"/>
-                  <Component id="nombreCli" alignment="0" pref="246" max="32767" attributes="0"/>
-                  <Component id="apellidoCli" alignment="0" pref="246" max="32767" attributes="0"/>
-                  <Component id="cedulaCli" alignment="0" pref="246" max="32767" attributes="0"/>
-                  <Component id="celuCli" alignment="0" max="32767" attributes="0"/>
-                  <Component id="direcCli" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="emailCle" alignment="0" pref="246" max="32767" attributes="0"/>
+                      <Component id="apellidoCli" alignment="0" pref="246" max="32767" attributes="0"/>
+                      <Component id="cedulaCli" alignment="0" pref="246" max="32767" attributes="0"/>
+                      <Component id="celuCli" alignment="0" max="32767" attributes="0"/>
+                      <Component id="direcCli" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="62" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
+                  <Component id="nombreCli" min="-2" pref="246" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="132" max="32767" attributes="0"/>
           </Group>

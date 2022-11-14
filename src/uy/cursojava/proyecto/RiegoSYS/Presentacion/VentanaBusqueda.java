@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package uy.cursojava.proyecto.RiegoSYS.Presentación;
+package uy.cursojava.proyecto.RiegoSYS.Presentacion;
 
 import uy.cursojava.proyecto.RiegoSYS.Presentacion.Inicio;
 
