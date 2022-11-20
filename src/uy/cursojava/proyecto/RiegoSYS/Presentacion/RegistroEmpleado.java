@@ -52,14 +52,12 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         jCrearEmpleado = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        empleadoTipoEmpleado = new javax.swing.JTextField();
-        empleadoTipoCon = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         empleadoEmail = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
-        empleadoTipoSalario = new javax.swing.JTextField();
         jLabelError = new javax.swing.JLabel();
         jLabelError1 = new javax.swing.JLabel();
+        jComboBoxTipoContrato = new javax.swing.JComboBox<>();
+        jComboBoxTipoSalario = new javax.swing.JComboBox<>();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -95,7 +93,9 @@ public class RegistroEmpleado extends javax.swing.JFrame {
 
         jLabel4.setText("Email");
 
-        jLabel5.setText("Tipo de empleado");
+        jComboBoxTipoContrato.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mensual", "Jornalero" }));
+
+        jComboBoxTipoSalario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Mensual", "Quicenal" }));
 
         jMenu1.setText("Inicio");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -115,45 +115,48 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(102, 102, 102)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(empleadoApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(empleadoNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(empleadoCI)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(empleadoEmail)
-                            .addComponent(empleadoNombreTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                            .addComponent(empleadoApellidoTxt)
-                            .addComponent(empleadoCITxt, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(empleadoCelular)
-                            .addComponent(empleadoDireccion)
-                            .addComponent(empleadoBanco)
-                            .addComponent(empleadoCuentabanco)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(empleadoTipoCon)
-                            .addComponent(empleadoCelularTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(empleadoDireccionTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(empleadoBancoTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(empleadoCuentabancoTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
-                            .addComponent(empleadoTipoSalario, javax.swing.GroupLayout.Alignment.LEADING)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addContainerGap(243, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabelError)
-                            .addComponent(empleadoTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabelError1))))
-                .addContainerGap(161, Short.MAX_VALUE))
+                            .addComponent(jLabelError1))
+                        .addGap(246, 246, 246))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(235, 235, 235)
+                        .addComponent(jComboBoxTipoSalario, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(102, 102, 102)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(empleadoApellido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(empleadoNombre, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(empleadoCI)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(empleadoNombreTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                                    .addComponent(empleadoEmail, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(empleadoCITxt, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(empleadoApellidoTxt, javax.swing.GroupLayout.Alignment.TRAILING)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(empleadoCelular)
+                                    .addComponent(empleadoDireccion)
+                                    .addComponent(empleadoBanco)
+                                    .addComponent(empleadoCuentabanco)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel3))
+                                .addGap(24, 24, 24)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(empleadoCelularTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(empleadoDireccionTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(empleadoBancoTxt, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(empleadoCuentabancoTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+                                    .addComponent(jComboBoxTipoContrato, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
+                .addGap(168, 168, 168))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,22 +204,15 @@ public class RegistroEmpleado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(empleadoCuentabanco)
                     .addComponent(empleadoCuentabancoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(empleadoTipoCon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addComponent(jLabel3))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(empleadoTipoSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(jComboBoxTipoContrato, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(empleadoTipoEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3)
+                    .addComponent(jComboBoxTipoSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(jLabelError)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabelError1)
@@ -232,7 +228,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         Empleado e = new Empleado();
         e.setApellido(empleadoApellidoTxt.getText());
         e.setBanco(empleadoCuentabancoTxt.getText());
-        e.setContrato(tipoContrato(empleadoTipoCon.getText(), empleadoTipoSalario.getText()));
+      //  e.setContrato(tipoContrato(empleadoTipoCon.getText(), empleadoTipoSalario.getText()));
         e.setCueBanPago(Integer.valueOf(empleadoCuentabancoTxt.getText()));
         e.setDirecc(empleadoDireccionTxt.getText());
         try {
@@ -241,16 +237,18 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         } catch (NumberFormatException c) {
             jLabelError.setText("Ingrese bien el su Documento o su Numero de Celular");
         }
-        if (tipoEmpleado(empleadoTipoEmpleado.getText()) != 0) {
-            e.setTipoEmpleado(tipoEmpleado(empleadoTipoEmpleado.getText()));
-            System.out.println("agrego");
-        } else {
+//        if (tipoEmpleado(empleadoTipoEmpleado.getText()) != 0) {
+//            e.setTipoEmpleado(tipoEmpleado(empleadoTipoEmpleado.getText()));
+//           
+     //   }
+    //else {
             jLabelError1.setText("Debe ingresar un tipo de empleado correcto");
-        }
+      //  }
         e.setEmail(empleadoEmail.getText());
         e.setNombre(empleadoNombreTxt.getText());
         try {
             s.getListaEmpleado().add(e);
+             System.out.println("agrego");
         } catch (NullPointerException j) {
             jLabelError.setText("Debe ingresar todos los datos del Empleado");
         }
@@ -262,30 +260,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenu1MouseClicked
 
-    private Integer tipoEmpleado(String tipoEmpleado) {
-        Integer tipoE = 0;
-        if (tipoEmpleado.equalsIgnoreCase("Mensual")) {
-            tipoE = 1;
-        } else if (tipoEmpleado.equalsIgnoreCase("Jornalero")) {
-            tipoE = 2;
-        }
-        return tipoE;
-    }
-    
-    private Contrato tipoContrato(String tipoS, String tipoC) {
-        Contrato c = new Contrato();
-        if (tipoS.equalsIgnoreCase("Mensual")) {
-            c.setTipoSalario("Mensual");
-        } else if (tipoS.equalsIgnoreCase("Quincenal")) {
-            c.setTipoSalario("Quincenal");
-        }
-        if (tipoC.equalsIgnoreCase("Mensual")) {
-            c.setTipoContrato("Mensual");
-        } else if (tipoC.equalsIgnoreCase("Jornalero")) {
-            c.setTipoContrato("Jornalero");
-        }
-        return c;
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel empleadoApellido;
@@ -303,15 +277,13 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     private javax.swing.JTextField empleadoEmail;
     private javax.swing.JLabel empleadoNombre;
     private javax.swing.JTextField empleadoNombreTxt;
-    private javax.swing.JTextField empleadoTipoCon;
-    private javax.swing.JTextField empleadoTipoEmpleado;
-    private javax.swing.JTextField empleadoTipoSalario;
+    private javax.swing.JComboBox<String> jComboBoxTipoContrato;
+    private javax.swing.JComboBox<String> jComboBoxTipoSalario;
     private javax.swing.JButton jCrearEmpleado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabelError;
     private javax.swing.JLabel jLabelError1;
     private javax.swing.JMenu jMenu1;

@@ -44,55 +44,61 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="empleadoApellido" max="32767" attributes="0"/>
-                              <Component id="empleadoNombre" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="empleadoCI" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="empleadoEmail" max="32767" attributes="0"/>
-                          <Component id="empleadoNombreTxt" alignment="0" pref="246" max="32767" attributes="0"/>
-                          <Component id="empleadoApellidoTxt" alignment="0" max="32767" attributes="0"/>
-                          <Component id="empleadoCITxt" alignment="0" pref="246" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="empleadoCelular" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="empleadoDireccion" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="empleadoBanco" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="empleadoCuentabanco" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="empleadoTipoCon" max="32767" attributes="0"/>
-                          <Component id="empleadoCelularTxt" alignment="0" max="32767" attributes="0"/>
-                          <Component id="empleadoDireccionTxt" alignment="0" max="32767" attributes="0"/>
-                          <Component id="empleadoBancoTxt" alignment="0" max="32767" attributes="0"/>
-                          <Component id="empleadoCuentabancoTxt" alignment="1" pref="246" max="32767" attributes="0"/>
-                          <Component id="empleadoTipoSalario" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="22" max="32767" attributes="0"/>
+                      <EmptySpace pref="243" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="jLabelError" min="-2" max="-2" attributes="0"/>
-                          <Component id="empleadoTipoEmpleado" min="-2" pref="246" max="-2" attributes="0"/>
                           <Component id="jLabelError1" alignment="0" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="246" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="235" max="-2" attributes="0"/>
+                      <Component id="jComboBoxTipoSalario" max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="empleadoApellido" max="32767" attributes="0"/>
+                                      <Component id="empleadoNombre" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="empleadoCI" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace pref="55" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="empleadoNombreTxt" alignment="0" pref="254" max="32767" attributes="0"/>
+                                  <Component id="empleadoEmail" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="empleadoCITxt" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="empleadoApellidoTxt" alignment="1" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="empleadoCelular" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="empleadoDireccion" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="empleadoBanco" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="empleadoCuentabanco" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="24" pref="24" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="empleadoCelularTxt" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="empleadoDireccionTxt" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="empleadoBancoTxt" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="empleadoCuentabancoTxt" alignment="1" pref="254" max="32767" attributes="0"/>
+                                  <Component id="jComboBoxTipoContrato" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace pref="161" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="168" max="-2" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace max="32767" attributes="0"/>
@@ -154,27 +160,17 @@
                   <Component id="empleadoCuentabanco" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="empleadoCuentabancoTxt" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="empleadoTipoCon" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBoxTipoContrato" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="empleadoTipoSalario" min="-2" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="empleadoTipoEmpleado" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jComboBoxTipoSalario" alignment="3" min="-2" pref="27" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="32767" attributes="0"/>
               <Component id="jLabelError" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jLabelError1" min="-2" max="-2" attributes="0"/>
@@ -258,10 +254,6 @@
         <Property name="text" type="java.lang.String" value="Tipo de salario:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="empleadoTipoEmpleado">
-    </Component>
-    <Component class="javax.swing.JTextField" name="empleadoTipoCon">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
       <Properties>
         <Property name="text" type="java.lang.String" value="Email"/>
@@ -269,16 +261,35 @@
     </Component>
     <Component class="javax.swing.JTextField" name="empleadoEmail">
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel5">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Tipo de empleado"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="empleadoTipoSalario">
-    </Component>
     <Component class="javax.swing.JLabel" name="jLabelError">
     </Component>
     <Component class="javax.swing.JLabel" name="jLabelError1">
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBoxTipoContrato">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Mensual"/>
+            <StringItem index="1" value="Jornalero"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="jComboBoxTipoSalario">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="Mensual"/>
+            <StringItem index="1" value="Quicenal"/>
+          </StringArray>
+        </Property>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+      </AuxValues>
     </Component>
   </SubComponents>
 </Form>

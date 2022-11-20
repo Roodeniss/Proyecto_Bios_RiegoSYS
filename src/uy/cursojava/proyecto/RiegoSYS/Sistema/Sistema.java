@@ -12,10 +12,9 @@ import uy.cursojava.proyecto.RiegoSYS.Logica.*;
  * @author rodrigo denis, rodrigo  silveria, bruno rasetti
  */
 public class Sistema {
-    private ArrayList<Empleado> listaEmpleado;
-    private ArrayList<Servicio> listaServicio;
-    private ArrayList<Cliente> listaCliente;
-    private ArrayList<Usuario> listaUsuario;
+    private ArrayList<Empleado> listaEmpleado = new ArrayList<Empleado>();
+    private ArrayList<Servicio> listaServicio = new ArrayList<Servicio>();
+    private ArrayList<Cliente> listaCliente = new ArrayList<Cliente>() ;
     
     /*    gets    */
 
@@ -29,10 +28,6 @@ public class Sistema {
 
     public ArrayList<Cliente> getListaCliente() {
         return listaCliente;
-    }
-
-    public ArrayList<Usuario> getListaUsuario() {
-        return listaUsuario;
     }
     
 }

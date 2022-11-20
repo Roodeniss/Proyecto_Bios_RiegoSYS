@@ -11,21 +11,27 @@ import uy.cursojava.proyecto.RiegoSYS.Logica.Usuario;
 
 /**
  *
- * @author rodrigodenis
+ * @author rodrigo denis, rodrigo silveria, bruno rasetti
  */
 public class PersistenciaUsuario {
-     private static final String SQL_CONSULTA_EXISTE_USUARIO =("select * from  ");
-   
+
+    private static final String SQL_CONSULTA_EXISTE_USUARIO = ("select * from  ");
+
+    //paso 1 : crear la conexion a la base
+    //paso 2 : crear el prepare statement
+    //paso 3 : ejecutar la consulta del preparestatement
+    //paso 4 : cargar los resultados en los objetos de la capa logical
     
-    public Usuario exiUsuario(Usuario u){
+    public Usuario exiUsuario(Usuario u) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Usuario resultado = null;
-        
-        try{
-           
-        }catch(Exception e){
-            
+
+        try {
+
+        } catch (Exception e) {
+
         }
+        return resultado;
     }
 }

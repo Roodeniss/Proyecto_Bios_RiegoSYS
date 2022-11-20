@@ -5,6 +5,7 @@
 package uy.cursojava.proyecto.RiegoSYS.Logica;
 
 import java.util.Calendar;
+import java.util.Date;
 
 /**
  *
@@ -13,12 +14,13 @@ import java.util.Calendar;
 public class Servicio {
     /*     Atributos      */
     private Empleado empleado;
-    private Integer tipoServicio;
-    private Calendar fecha;
+    private Cliente cliente;
+    private String tipoServicio;
+    private String fecha;
     
     /*     Constructores         */
     
-    public Servicio(Empleado empleado, Integer tipoServicio, Calendar fecha) {
+    public Servicio(Empleado empleado, String tipoServicio, String fecha) {
         this.empleado = empleado;
         this.tipoServicio = tipoServicio;
         this.fecha = fecha;
@@ -26,7 +28,7 @@ public class Servicio {
     
     public Servicio(){
     this.empleado= null;
-    this.tipoServicio = 0;
+    this.tipoServicio = "";
     this.fecha = null; //averiguar como dejar una fehca de tipo calendar vacia.
     }
     
@@ -38,20 +40,28 @@ public class Servicio {
     public void setEmpleado(Empleado empleado) {
         this.empleado = empleado;
     }
+    
+    public Cliente getCliente(){
+        return cliente;
+    }
+    
+    public void setCliente(Cliente cliente){
+        this.cliente = cliente;
+    }
 
-    public Integer getTipoServicio() {
+    public String getTipoServicio() {
         return tipoServicio;
     }
 
-    public void setTipoServicio(Integer tipoServicio) {
+    public void setTipoServicio(String tipoServicio) {
         this.tipoServicio = tipoServicio;
     }
 
-    public Calendar getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Calendar fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
