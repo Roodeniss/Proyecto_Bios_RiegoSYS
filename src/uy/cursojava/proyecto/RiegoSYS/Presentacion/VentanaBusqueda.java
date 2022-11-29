@@ -35,8 +35,6 @@ public class VentanaBusqueda extends javax.swing.JFrame {
         buscar = new javax.swing.JButton();
         resultadosbusqueda = new javax.swing.JTextField();
         jScrollBar1 = new javax.swing.JScrollBar();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        resultadodatos = new javax.swing.JTextArea();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -55,10 +53,6 @@ public class VentanaBusqueda extends javax.swing.JFrame {
                 resultadosbusquedaActionPerformed(evt);
             }
         });
-
-        resultadodatos.setColumns(20);
-        resultadodatos.setRows(5);
-        jScrollPane1.setViewportView(resultadodatos);
 
         jMenu1.setText("Inicio");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -84,9 +78,7 @@ public class VentanaBusqueda extends javax.swing.JFrame {
                         .addComponent(resultadosbusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollBar1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 417, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30))
+                        .addGap(30, 453, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(barrabusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -108,7 +100,6 @@ public class VentanaBusqueda extends javax.swing.JFrame {
                     .addComponent(buscar))
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                     .addComponent(resultadosbusqueda)
                     .addComponent(jScrollBar1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE))
                 .addContainerGap(36, Short.MAX_VALUE))
@@ -138,8 +129,6 @@ public class VentanaBusqueda extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JScrollBar jScrollBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea resultadodatos;
     private javax.swing.JTextField resultadosbusqueda;
     // End of variables declaration//GEN-END:variables
 }

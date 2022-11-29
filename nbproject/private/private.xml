@@ -4,17 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Presentacion/RegistroEmpleado.java</file>
-            <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Logica/Empresa.java</file>
-            <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Presentacion/VentanaServicio.java</file>
-            <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Presentacion/Inicio.java</file>
-            <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Sistema/Sistema.java</file>
-            <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Presentacion/VentanaHoras.java</file>
-            <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Presentacion/Login.java</file>
+            <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Logica/FachadaEmpleado.java</file>
+            <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Persistencia/PresistenciaEmpleado.java</file>
             <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Persistencia/Conexion.java</file>
-            <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Presentacion/VentanaBusqueda.java</file>
-            <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Logica/Servicio.java</file>
-            <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Persistencia/PersistenciaUsuario.java</file>
-            <file>file:/Users/rodrigodenis/NetBeansProjects/RiegoSYS/src/uy/cursojava/proyecto/RiegoSYS/Presentacion/RegistroCliente.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,13 +1,18 @@
 package uy.cursojava.proyecto.RiegoSYS.Presentacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import uy.cursojava.proyecto.RiegoSYS.Excepciones.UsuarioNoValidoException;
+import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaUsuario;
+import uy.cursojava.proyecto.RiegoSYS.Logica.Usuario;
+import uy.cursojava.proyecto.RiegoSYS.Persistencia.PersistenciaUsuario;
 import uy.cursojava.proyecto.RiegoSYS.Presentacion.Inicio;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-
-
 /**
  *
  * @author rodrigo denis, rodrigo silveria, bruno rasetti
@@ -104,10 +109,33 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private FachadaUsuario fachada = new FachadaUsuario();
+
     private void bottonAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bottonAceptarActionPerformed
-      Inicio in = new Inicio();
-      in.setVisible(true);
-      this.setVisible(false);
+        String nombreUsuario = this.usuario.getText();
+        String clave = this.contra.getText();
+
+        Usuario usuario = new Usuario();
+        Usuario usuarioRes = null;
+        usuario.setNombreUsuario(nombreUsuario);
+        usuario.setClave(clave);
+
+        try {
+            usuarioRes = this.fachada.fachadaUsuario(usuario);
+
+            if (usuarioRes != null) {
+                JOptionPane.showMessageDialog(this, "Bienvenido " + usuario.getNombreUsuario());
+                Inicio in = new Inicio();
+                in.setVisible(true);
+                this.setVisible(false);
+            }
+
+        } catch (UsuarioNoValidoException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        }
+
+
     }//GEN-LAST:event_bottonAceptarActionPerformed
 
     /**
@@ -137,8 +165,8 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        
-        
+
+       
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {

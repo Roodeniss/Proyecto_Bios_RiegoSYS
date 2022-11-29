@@ -4,9 +4,15 @@
  */
 package uy.cursojava.proyecto.RiegoSYS.Presentacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import uy.cursojava.proyecto.RiegoSYS.Excepciones.BDException;
+import uy.cursojava.proyecto.RiegoSYS.Excepciones.EmpleadoNoValidoException;
 import uy.cursojava.proyecto.RiegoSYS.Presentacion.Inicio;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Contrato;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Empleado;
+import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaEmpleado;
 import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
 
 /**
@@ -223,35 +229,50 @@ public class RegistroEmpleado extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    private FachadaEmpleado fachada = new FachadaEmpleado();
+
+    private void limpiarCampos() {
+
+//        lechapa.setText(null);
+//        lecilintrada.setText(null);
+//        lemarca.setText(null);
+//        lepadron.setText(null);
+//        lepropietario.setText(null);
+//        txtChapa.setText(null);
+//        txtPadron.setText(null);
+//        txtPropietario.setText(null);
+//        txtMarca.setText(null);
+    }
 
     private void jCrearEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCrearEmpleadoActionPerformed
         Empleado e = new Empleado();
         e.setApellido(empleadoApellidoTxt.getText());
         e.setBanco(empleadoCuentabancoTxt.getText());
-      //  e.setContrato(tipoContrato(empleadoTipoCon.getText(), empleadoTipoSalario.getText()));
+        //e.setContrato(tipoContrato(empleadoTipoCon.getText(), empleadoTipoSalario.getText()));
         e.setCueBanPago(Integer.valueOf(empleadoCuentabancoTxt.getText()));
         e.setDirecc(empleadoDireccionTxt.getText());
         try {
             e.setDocumento(Integer.valueOf(empleadoCITxt.getText()));
             e.setNumCel(Integer.valueOf(empleadoCelularTxt.getText()));
         } catch (NumberFormatException c) {
-            jLabelError.setText("Ingrese bien el su Documento o su Numero de Celular");
+            jLabelError.setText("Ingrese bien el su Documento o su Numero de Celular"); //cambiar por jOptionPane
         }
-//        if (tipoEmpleado(empleadoTipoEmpleado.getText()) != 0) {
-//            e.setTipoEmpleado(tipoEmpleado(empleadoTipoEmpleado.getText()));
-//           
-     //   }
-    //else {
-            jLabelError1.setText("Debe ingresar un tipo de empleado correcto");
-      //  }
         e.setEmail(empleadoEmail.getText());
         e.setNombre(empleadoNombreTxt.getText());
         try {
-            s.getListaEmpleado().add(e);
-             System.out.println("agrego");
-        } catch (NullPointerException j) {
-            jLabelError.setText("Debe ingresar todos los datos del Empleado");
+//            if (this.fachada.FachaEmpleadoExiste(e) != null) {
+//                JOptionPane.showMessageDialog(this, "El empleado: " + e.getNombre() + " ya existe");
+//            } else {
+                this.fachada.FachaEmpleadoAgregar(e);
+                JOptionPane.showMessageDialog(this, "Se creó el empleado: " + e.getNombre());
+//            }
+        } catch (EmpleadoNoValidoException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (BDException ex) {
+            Logger.getLogger(RegistroEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }//GEN-LAST:event_jCrearEmpleadoActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked

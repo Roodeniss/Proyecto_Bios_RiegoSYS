@@ -27,21 +27,31 @@ public class Usuario {
     
     /*  getters y setters   */
 
-    public String getId() {
+    public String getNombreUsuario() {
         return id;
     }
 
-    public void setId(String id) {
+    public void getNombreUsuario(String id) {
         this.id = id;
     }
 
-    public String getContra() {
+    public String getClave() {
         return contra;
     }
 
-    public void setContra(String contra) {
+    public void getClave(String contra) {
         this.contra = contra;
     }
+
+    public void setNombreUsuario(String id) {
+        this.id = id;
+    }
+
+    public void setClave(String contra) {
+        this.contra = contra;
+    }
+    
+    
     
     
 }
