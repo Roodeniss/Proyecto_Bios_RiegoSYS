@@ -166,7 +166,6 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         Empleado e = new Empleado();
         ListModel<String> lista = listaEmpleado.getModel();
         int o = listaEmpleado.getSelectedIndex();
-        System.out.println(lista.getElementAt(o).toString());
         String empleadoEliminar = lista.getElementAt(o).toString();
         //El string anterior tiene la siguente forma: nombre  apellido  cedula
          String[] textoEmpleado = empleadoEliminar.split(" ");

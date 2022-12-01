@@ -178,6 +178,7 @@ public class RegistroCliente extends javax.swing.JFrame {
         }
         c.setEmail(emailCle.getText());
         c.setNombre(nombreCli.getText());
+        
         try{
         
         }catch(NullPointerException e){

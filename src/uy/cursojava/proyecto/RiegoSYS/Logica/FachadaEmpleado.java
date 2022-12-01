@@ -10,7 +10,6 @@ import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.BDException;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.EmpleadoNoValidoException;
-import uy.cursojava.proyecto.RiegoSYS.Persistencia.PresistenciaEmpleado;
 
 /**
  *
@@ -18,7 +17,7 @@ import uy.cursojava.proyecto.RiegoSYS.Persistencia.PresistenciaEmpleado;
  */
 public class FachadaEmpleado {
 
-    private PresistenciaEmpleado pe = new PresistenciaEmpleado();
+    private PresistenciaCliente pe = new PresistenciaCliente();
 
     public Empleado FachaEmpleadoExiste(Empleado e) throws EmpleadoNoValidoException {
         Empleado empleadoRes = null;
