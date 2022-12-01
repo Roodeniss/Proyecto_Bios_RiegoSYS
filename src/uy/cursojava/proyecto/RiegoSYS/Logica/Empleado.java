@@ -8,7 +8,8 @@ package uy.cursojava.proyecto.RiegoSYS.Logica;
  *
  * @author rodrigo denis, rodrigo silveria, bruno rasetti
  */
-public class Empleado extends Persona{
+public class Empleado extends Persona {
+
     /*    Aatributos      */
     private String banco;
     private Integer cueBanPago;
@@ -16,18 +17,21 @@ public class Empleado extends Persona{
     private String horaEntrada;
     private String horaSalida;
     private Contrato contrato;
-    
+
     /*    constructores     */
-    public Empleado(String banco, Integer cueBanPago, Integer tipoEmpleado, String horaEntrada, String horaSalida, Contrato contrato) {
+    public Empleado(String banco, Integer cueBanPago) {
         this.banco = banco;
         this.cueBanPago = cueBanPago;
-        this.tipoEmpleado = tipoEmpleado;
+    }
+
+    public Empleado(String horaEntrada, String horaSalida, Contrato contrato, Integer tipoEmpleado) {
         this.horaEntrada = horaEntrada;
         this.horaSalida = horaSalida;
         this.contrato = contrato;
+        this.tipoEmpleado = tipoEmpleado;
     }
-    
-    public Empleado(){
+
+    public Empleado() {
         this.banco = "";
         this.contrato = null;
         this.cueBanPago = 0;
@@ -35,9 +39,8 @@ public class Empleado extends Persona{
         this.horaSalida = "";
         this.tipoEmpleado = 0;
     }
-    
-    /*      getter y setter   */
 
+    /*      getter y setter   */
     public String getBanco() {
         return banco;
     }
@@ -86,5 +89,9 @@ public class Empleado extends Persona{
         this.contrato = contrato;
     }
 
-    
+    @Override
+    public String toString() {
+        return this.getDocumento() + " " + this.getApellido() + " " + this.getNombre();
+    }
+
 }

@@ -4,17 +4,17 @@
  */
 package uy.cursojava.proyecto.RiegoSYS.Logica;
 
-import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
+//import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
 /**
  *
  * @author rodrigo denis, rodrigo silveria, bruno rasetti
  */
 public class Empresa {
-    Sistema s = new Sistema();
-    /*         Atributos           */
-    private Sistema listaEmpleados;
-    private Sistema listaClientes;
-    
+//    Sistema s = new Sistema();
+//    /*         Atributos           */
+//    private Sistema listaEmpleados;
+//    private Sistema listaClientes;
+//    
     /*   Constructor      */
     public Empresa(){
       //  this.listaClientes = s.getListaClientes();

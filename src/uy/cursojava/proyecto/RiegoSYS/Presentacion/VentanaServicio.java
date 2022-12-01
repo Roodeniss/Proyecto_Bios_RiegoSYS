@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Cliente;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Empleado;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Servicio;
-import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
+//import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
 
 /**
  *
@@ -24,7 +24,7 @@ public class VentanaServicio extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
     }
-    Sistema sis = new Sistema();
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -185,25 +185,25 @@ public class VentanaServicio extends javax.swing.JFrame {
 
     private Cliente obtenerCliente(String s) {
         Cliente retorno = new Cliente();
-        if (/*!s.equalsIgnoreCase("") &&*/sis.getListaCliente().size() != 0) {
-            for (int i = 0; i < sis.getListaCliente().size(); i++) {
-                if (sis.getListaCliente().get(i).getDocumento() == Integer.parseInt(s)) {
-                    retorno = sis.getListaCliente().get(i);
-                }
-            }
-        }
+        //if (/*!s.equalsIgnoreCase("") &&*/sis.getListaCliente().size() != 0) {
+//            for (int i = 0; i < sis.getListaCliente().size(); i++) {
+//                if (sis.getListaCliente().get(i).getDocumento() == Integer.parseInt(s)) {
+//                    retorno = sis.getListaCliente().get(i);
+//                }
+           // }
+      //  }
         return retorno;
     }
 
     private Empleado obtenerEmpleado(String s) {
         Empleado retorno = new Empleado();
-        if (!s.equalsIgnoreCase(s) && sis.getListaEmpleado().size() != 0) {
-            for (int i = 0; i < sis.getListaEmpleado().size(); i++) {
-                if (sis.getListaEmpleado().get(i).getDocumento() == Integer.parseInt(s)) {
-                    retorno = sis.getListaEmpleado().get(i);
-                }
-            }
-        }
+        //if (!s.equalsIgnoreCase(s) && sis.getListaEmpleado().size() != 0) {
+           // for (int i = 0; i < sis.getListaEmpleado().size(); i++) {
+       //         if (sis.getListaEmpleado().get(i).getDocumento() == Integer.parseInt(s)) {
+       //             retorno = sis.getListaEmpleado().get(i);
+     //           }
+     //       }
+    //    }
         return retorno;
     }
 

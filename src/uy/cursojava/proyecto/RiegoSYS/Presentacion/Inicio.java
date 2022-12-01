@@ -34,7 +34,7 @@ public class Inicio extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButtonRegistroHoras = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        botonVentanaBusquedaEmpleado = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -68,7 +68,12 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setText("jButton5");
+        botonVentanaBusquedaEmpleado.setText("Modificacion Planilla");
+        botonVentanaBusquedaEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonVentanaBusquedaEmpleadoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Riego SYS");
 
@@ -89,12 +94,12 @@ public class Inicio extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(151, 151, 151)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton5)
+                            .addComponent(botonVentanaBusquedaEmpleado)
                             .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButtonRegistroHoras, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(155, Short.MAX_VALUE))
+                .addContainerGap(149, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -112,7 +117,7 @@ public class Inicio extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButtonRegistroHoras)
                 .addGap(18, 18, 18)
-                .addComponent(jButton5)
+                .addComponent(botonVentanaBusquedaEmpleado)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
@@ -143,12 +148,18 @@ public class Inicio extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButtonRegistroHorasActionPerformed
 
+    private void botonVentanaBusquedaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVentanaBusquedaEmpleadoActionPerformed
+        VentanaBusquedaEmpleado vbe = new VentanaBusquedaEmpleado();
+        vbe.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_botonVentanaBusquedaEmpleadoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonVentanaBusquedaEmpleado;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButtonRegistroHoras;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

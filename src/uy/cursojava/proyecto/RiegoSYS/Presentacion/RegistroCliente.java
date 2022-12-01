@@ -5,7 +5,7 @@
 package uy.cursojava.proyecto.RiegoSYS.Presentacion;
 
 import uy.cursojava.proyecto.RiegoSYS.Logica.Cliente;
-import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
+//import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
 
 /**
  *
@@ -16,7 +16,7 @@ public class RegistroCliente extends javax.swing.JFrame {
     /**
      * Creates new form RegistroClientes
      */
-    Sistema s = new Sistema();
+    
     
     public RegistroCliente() {
         initComponents();
@@ -179,7 +179,7 @@ public class RegistroCliente extends javax.swing.JFrame {
         c.setEmail(emailCle.getText());
         c.setNombre(nombreCli.getText());
         try{
-        s.getListaCliente().add(c);
+        
         }catch(NullPointerException e){
              jLabelError.setText("Debe ingresar todos los datos del Cliente");
         }
@@ -187,10 +187,12 @@ public class RegistroCliente extends javax.swing.JFrame {
 
     private void jBotonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCrearActionPerformed
         crearCli();
+        limpiarCampos();
     }//GEN-LAST:event_jBotonCrearActionPerformed
 
     private void jBotonCrearKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBotonCrearKeyPressed
         crearCli();
+        limpiarCampos();
         //event for keyPressed on jFrame?
     }//GEN-LAST:event_jBotonCrearKeyPressed
 
@@ -200,6 +202,13 @@ public class RegistroCliente extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenu1MouseClicked
 
+    private void limpiarCampos() {
+           apellidoCli.setText(null);
+           cedulaCli.setText(null);
+           celuCli.setText(null);
+           direcCli.setText(null);
+           emailCle.setText(null);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField apellidoCli;

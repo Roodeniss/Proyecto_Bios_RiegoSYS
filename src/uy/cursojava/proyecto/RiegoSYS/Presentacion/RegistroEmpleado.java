@@ -13,7 +13,7 @@ import uy.cursojava.proyecto.RiegoSYS.Presentacion.Inicio;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Contrato;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Empleado;
 import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaEmpleado;
-import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
+//import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
 
 /**
  *
@@ -24,7 +24,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     /**
      * Creates new form empleadoDatos
      */
-    Sistema s = new Sistema();
+  
 
     public RegistroEmpleado() {
         initComponents();
@@ -231,18 +231,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private FachadaEmpleado fachada = new FachadaEmpleado();
 
-    private void limpiarCampos() {
-
-//        lechapa.setText(null);
-//        lecilintrada.setText(null);
-//        lemarca.setText(null);
-//        lepadron.setText(null);
-//        lepropietario.setText(null);
-//        txtChapa.setText(null);
-//        txtPadron.setText(null);
-//        txtPropietario.setText(null);
-//        txtMarca.setText(null);
-    }
 
     private void jCrearEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCrearEmpleadoActionPerformed
         Empleado e = new Empleado();
@@ -265,6 +253,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
 //            } else {
                 this.fachada.FachaEmpleadoAgregar(e);
                 JOptionPane.showMessageDialog(this, "Se creó el empleado: " + e.getNombre());
+                limpiarCampos();
 //            }
         } catch (EmpleadoNoValidoException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
@@ -281,6 +270,17 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenu1MouseClicked
 
+       private void limpiarCampos() {
+           empleadoApellidoTxt.setText(null);
+           empleadoBancoTxt.setText(null);
+           empleadoCITxt.setText(null);
+           empleadoNombreTxt.setText(null);
+           empleadoEmail.setText(null);
+           empleadoCITxt.setText(null);
+           empleadoCelularTxt.setText(null);
+           empleadoCuentabancoTxt.setText(null);
+           empleadoDireccionTxt.setText(null);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel empleadoApellido;
