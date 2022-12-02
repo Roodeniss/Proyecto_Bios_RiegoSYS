@@ -5,6 +5,7 @@
 package uy.cursojava.proyecto.RiegoSYS.Presentacion;
 
 import uy.cursojava.proyecto.RiegoSYS.Logica.Cliente;
+import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaCliente;
 //import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
 
 /**
@@ -166,6 +167,9 @@ public class RegistroCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+     private FachadaCliente fachada = new FachadaCliente();
+    
     private void crearCli() {
         Cliente c = new Cliente();
         c.setApellido(apellidoCli.getText());
@@ -186,6 +190,7 @@ public class RegistroCliente extends javax.swing.JFrame {
         }
     }
 
+    
     private void jBotonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCrearActionPerformed
         crearCli();
         limpiarCampos();

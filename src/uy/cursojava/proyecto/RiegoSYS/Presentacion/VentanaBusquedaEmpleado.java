@@ -4,6 +4,7 @@
  */
 package uy.cursojava.proyecto.RiegoSYS.Presentacion;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -37,22 +38,36 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
 
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         nombreEmpleado = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        listaEmpleado = new javax.swing.JList<>();
         botonEliminarEmpleado = new javax.swing.JButton();
-        botonAgregarHoras = new javax.swing.JButton();
         botonEditarEmpleado = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableEmpleado = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
         jMenuItem1.setText("jMenuItem1");
 
         jMenuItem2.setText("jMenuItem2");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,18 +82,37 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
 
         jLabel3.setText("Nombre del empleado");
 
-        jScrollPane1.setViewportView(listaEmpleado);
-
         botonEliminarEmpleado.setText("Eliminar");
-        botonEliminarEmpleado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonEliminarEmpleadoActionPerformed(evt);
-            }
-        });
-
-        botonAgregarHoras.setText("Agregar Horas");
 
         botonEditarEmpleado.setText("Editar");
+
+        jTableEmpleado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Apellido", "Documento", "Direccion", "Email", "Celular", "Cuenta Banco", "Banco"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true, true, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTableEmpleado);
 
         jMenu1.setText("Inicio");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -95,53 +129,48 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(botonEliminarEmpleado)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(botonAgregarHoras)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(botonEditarEmpleado))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(nombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buscar)))))
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jScrollPane3)
+                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(botonEliminarEmpleado)
+                .addGap(46, 46, 46)
+                .addComponent(botonEditarEmpleado)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(113, 113, 113)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(nombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(buscar)
+                .addGap(0, 205, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(jLabel1)
-                .addGap(12, 12, 12)
+                .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(nombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscar)
                     .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 408, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonEliminarEmpleado)
-                    .addComponent(botonAgregarHoras)
                     .addComponent(botonEditarEmpleado))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addGap(58, 58, 58))
         );
 
         pack();
@@ -156,40 +185,13 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         Empleado e = new Empleado();
-        e.setNombre(nombreEmpleado.getText());
-        DefaultListModel display = mismoNombre(fachada.FachaEmpleadoListar(e));
-        listaEmpleado.setModel(display);
-        nombreEmpleado.setText(null);
+        e.setNombre(nombreEmpleado.getSelectedText());
+       this.jTableEmpleado.setModel(fachada.FachaEmpleadoListar(e)); 
+        
     }//GEN-LAST:event_buscarActionPerformed
 
-    private void botonEliminarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarEmpleadoActionPerformed
-        Empleado e = new Empleado();
-        ListModel<String> lista = listaEmpleado.getModel();
-        int o = listaEmpleado.getSelectedIndex();
-        String empleadoEliminar = lista.getElementAt(o).toString();
-        //El string anterior tiene la siguente forma: nombre  apellido  cedula
-         String[] textoEmpleado = empleadoEliminar.split(" ");
-        //Separo el string de la lista en 3
-         Integer cedulaEmpleadoEliminar = Integer.parseInt(textoEmpleado[0]);
-          e.setDocumento(cedulaEmpleadoEliminar);
-        fachada.FachaEmoleadoEliminar(e);
-    }//GEN-LAST:event_botonEliminarEmpleadoActionPerformed
-
-    private DefaultListModel mismoNombre(DefaultListModel dlm){
-        DefaultListModel retorno = new DefaultListModel();
-        for (int i = 0; i < dlm.size(); i++) {
-            Empleado empleado =  (Empleado)dlm.get(i);
-            if (empleado.getNombre().equalsIgnoreCase(nombreEmpleado.getText())) {
-                retorno.addElement(dlm.get(i));
-            } 
-        }
-        return retorno;
-    }
-    
-    
-    
+  
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton botonAgregarHoras;
     private javax.swing.JButton botonEditarEmpleado;
     private javax.swing.JButton botonEliminarEmpleado;
     private javax.swing.JButton buscar;
@@ -200,8 +202,10 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JList<String> listaEmpleado;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTableEmpleado;
     private javax.swing.JTextField nombreEmpleado;
     // End of variables declaration//GEN-END:variables
 }

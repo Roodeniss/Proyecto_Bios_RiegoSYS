@@ -258,8 +258,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         } catch (EmpleadoNoValidoException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage());
-        } catch (BDException ex) {
-            Logger.getLogger(RegistroEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jCrearEmpleadoActionPerformed

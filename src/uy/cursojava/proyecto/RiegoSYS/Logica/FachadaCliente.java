@@ -7,43 +7,44 @@ package uy.cursojava.proyecto.RiegoSYS.Logica;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.BDException;
+import uy.cursojava.proyecto.RiegoSYS.Excepciones.ClienteNoValidoException;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.PersistenciaException;
 import uy.cursojava.proyecto.RiegoSYS.Persistencia.Conexion;
-import uy.cursojava.proyecto.RiegoSYS.Persistencia.PresistenciaEmpleado;
+import uy.cursojava.proyecto.RiegoSYS.Persistencia.PersistenciaCliente;
 
 /**
  *
  * @author rodrigodenis
  */
 public class FachadaCliente {
+    
+    private PersistenciaCliente pe = new PersistenciaCliente();
 
-    private static final String SQL_CONSULTA_EXISTE_CLIENTE = ("SELECT Cedula from Riego_SYS.Cliente WHERE Cedula=?");
-    private static final String SQL_CONSULTA_INSERT_CLIENTE = ("INSERT INTO Riego_SYS.Cliente VALUES (?,?,?,?,?,?,?,?)");
-    private static final String PS_DELETE_CLIENTE = ("DELETE FROM Riego_SYS.Cliente WHERE Cedula = ? ");
-
-    public static void agregar(Empleado e) throws BDException {
-        PreparedStatement ps = null;
+    public void FachaClienteAgregar(Cliente c) throws ClienteNoValidoException {
         try {
-            Connection con = Conexion.conectar();
-            ps = con.prepareStatement(SQL_CONSULTA_INSERT_CLIENTE);
-            ps.setString(1, e.getDocumento().toString());
-            ps.setString(2, e.getNombre());
-            ps.setString(3, e.getApellido());
-            ps.setInt(4, e.getNumCel());
-            ps.setString(5, e.getDirecc());
-            ps.setString(6, e.getBanco());
-            ps.setString(7, e.getCueBanPago().toString());
-            ps.setString(8, e.getEmail());
-            ps.execute();
-        } catch (SQLException ex) {
-            throw new BDException(ex.getMessage());
-        } catch (PersistenciaException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-        } finally {
-
+            pe.agregar(c);
+        } catch (BDException ex) {
+            Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+ public DefaultListModel FachaClienteListar(Cliente c) {
+       DefaultListModel<Cliente> retorno = new DefaultListModel();
+        try {
+            ArrayList<Cliente> listaAux = new ArrayList();
+            listaAux = pe.listarTodos(c);
+            for (int i = 0; i < listaAux.size(); i++) {
+                retorno.addElement(listaAux.get(i));
+            }
+        } catch (BDException ex) {
+            Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return retorno;
+    }
+    
 }

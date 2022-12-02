@@ -7,9 +7,10 @@ package uy.cursojava.proyecto.RiegoSYS.Logica;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.BDException;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.EmpleadoNoValidoException;
+import uy.cursojava.proyecto.RiegoSYS.Persistencia.PresistenciaEmpleado;
 
 /**
  *
@@ -17,7 +18,7 @@ import uy.cursojava.proyecto.RiegoSYS.Excepciones.EmpleadoNoValidoException;
  */
 public class FachadaEmpleado {
 
-    private PresistenciaCliente pe = new PresistenciaCliente();
+    private PresistenciaEmpleado pe = new PresistenciaEmpleado();
 
     public Empleado FachaEmpleadoExiste(Empleado e) throws EmpleadoNoValidoException {
         Empleado empleadoRes = null;
@@ -39,14 +40,25 @@ public class FachadaEmpleado {
             Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public DefaultListModel FachaEmpleadoListar(Empleado e) {
-       DefaultListModel<Empleado> retorno = new DefaultListModel();
+     
+    public DefaultTableModel FachaEmpleadoListar(Empleado e) {
+       DefaultTableModel retorno = new DefaultTableModel();
         try {
             ArrayList<Empleado> listaAux = new ArrayList();
             listaAux = pe.listarTodos(e);
+            Empleado emAux = null;
             for (int i = 0; i < listaAux.size(); i++) {
-                retorno.addElement(listaAux.get(i));
+                emAux = listaAux.get(i);
+                String nombre = emAux.getNombre();
+                String apellido = emAux.getApellido();
+                String direcc = emAux.getDirecc();
+                String email = emAux.getDirecc();
+                Integer documento = emAux.getDocumento();
+                Integer cel = emAux.getNumCel();
+                Integer cuentaBanco = emAux.getCueBanPago();
+                String banco = emAux.getBanco();
+                Object[] data = {nombre, apellido, documento, direcc, email, cel, cuentaBanco, banco};
+                retorno.addRow(data);
             }
         } catch (BDException ex) {
             Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
