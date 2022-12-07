@@ -9,7 +9,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.ListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.BDException;
+import uy.cursojava.proyecto.RiegoSYS.Excepciones.EmpleadoNoValidoException;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Empleado;
 import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaEmpleado;
 
@@ -36,10 +39,6 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         nombreEmpleado = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -51,23 +50,6 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         jTableEmpleado = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-
-        jMenuItem1.setText("jMenuItem1");
-
-        jMenuItem2.setText("jMenuItem2");
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -83,6 +65,11 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         jLabel3.setText("Nombre del empleado");
 
         botonEliminarEmpleado.setText("Eliminar");
+        botonEliminarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarEmpleadoActionPerformed(evt);
+            }
+        });
 
         botonEditarEmpleado.setText("Editar");
 
@@ -97,16 +84,9 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
                 "Nombre", "Apellido", "Documento", "Direccion", "Email", "Celular", "Cuenta Banco", "Banco"
             }
         ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Integer.class, java.lang.String.class
-            };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true, true, true, false
+                false, true, true, true, true, true, true, true
             };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
@@ -184,13 +164,39 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+
         Empleado e = new Empleado();
-        e.setNombre(nombreEmpleado.getSelectedText());
-       this.jTableEmpleado.setModel(fachada.FachaEmpleadoListar(e)); 
-        
+        e.setNombre(nombreEmpleado.getText());
+        try {
+            ArrayList<Empleado> listaEmp = fachada.FachaEmpleadoListar(e);
+            DefaultTableModel tablaEmpleadoModel = (DefaultTableModel) jTableEmpleado.getModel();
+            jTableEmpleado.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            tablaEmpleadoModel.setRowCount(0);
+            Empleado empleado = null;
+            for (int i = 0; i < listaEmp.size(); i++) {
+                empleado = listaEmp.get(i);
+                String nombre = empleado.getNombre();
+                String apellido = empleado.getApellido();
+                Integer documento = empleado.getDocumento();
+                String direcc = empleado.getDirecc();
+                String email = empleado.getEmail();
+                Integer cel = empleado.getNumCel();
+                Integer cuentaBanco = empleado.getCueBanPago();
+                String banco = empleado.getBanco();
+                Object[] data = {nombre, apellido, documento, direcc, email, cel, cuentaBanco, banco};
+                tablaEmpleadoModel.addRow(data);
+            }
+            nombreEmpleado.setText("");
+        } catch (EmpleadoNoValidoException ex) {
+            Logger.getLogger(VentanaBusquedaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buscarActionPerformed
 
-  
+    private void botonEliminarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarEmpleadoActionPerformed
+        
+    }//GEN-LAST:event_botonEliminarEmpleadoActionPerformed
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonEditarEmpleado;
     private javax.swing.JButton botonEliminarEmpleado;
@@ -200,11 +206,7 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable jTableEmpleado;
     private javax.swing.JTextField nombreEmpleado;
     // End of variables declaration//GEN-END:variables

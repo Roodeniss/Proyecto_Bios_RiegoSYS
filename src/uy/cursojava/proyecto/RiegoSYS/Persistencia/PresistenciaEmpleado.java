@@ -63,7 +63,7 @@ public class PresistenciaEmpleado {
             Connection con = Conexion.conectar();
             ps = con.prepareStatement(SQL_CONSULTA_INSERT_EMPLEADO);
             ps.setString(1, e.getDocumento().toString());
-            ps.setString(2, e.getNombre());
+            ps.setString(2, e.getNombre().toLowerCase());
             ps.setString(3, e.getApellido());
             ps.setInt(4, e.getNumCel());
             ps.setString(5, e.getDirecc());

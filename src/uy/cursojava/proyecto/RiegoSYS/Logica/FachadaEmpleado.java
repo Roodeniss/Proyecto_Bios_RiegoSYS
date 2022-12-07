@@ -32,37 +32,23 @@ public class FachadaEmpleado {
             Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void FachaEmoleadoEliminar(Empleado e){
+
+    public void FachaEmoleadoEliminar(Empleado e) throws EmpleadoNoValidoException {
         try {
             pe.eliminar(e.getDocumento());
         } catch (BDException ex) {
             Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
-    public DefaultTableModel FachaEmpleadoListar(Empleado e) {
-       DefaultTableModel retorno = new DefaultTableModel();
+
+    public ArrayList<Empleado> FachaEmpleadoListar(Empleado e) throws EmpleadoNoValidoException {
+        ArrayList<Empleado> listaAux = null;
         try {
-            ArrayList<Empleado> listaAux = new ArrayList();
+            listaAux = new ArrayList();
             listaAux = pe.listarTodos(e);
-            Empleado emAux = null;
-            for (int i = 0; i < listaAux.size(); i++) {
-                emAux = listaAux.get(i);
-                String nombre = emAux.getNombre();
-                String apellido = emAux.getApellido();
-                String direcc = emAux.getDirecc();
-                String email = emAux.getDirecc();
-                Integer documento = emAux.getDocumento();
-                Integer cel = emAux.getNumCel();
-                Integer cuentaBanco = emAux.getCueBanPago();
-                String banco = emAux.getBanco();
-                Object[] data = {nombre, apellido, documento, direcc, email, cel, cuentaBanco, banco};
-                retorno.addRow(data);
-            }
         } catch (BDException ex) {
             Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return retorno;
+        return listaAux;
     }
 }
