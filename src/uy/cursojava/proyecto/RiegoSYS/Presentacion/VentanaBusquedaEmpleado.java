@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.ListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -39,7 +40,7 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        nombreEmpleado = new javax.swing.JTextField();
+        jTextFieldNombreEmpleado = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -48,6 +49,7 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         botonEditarEmpleado = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableEmpleado = new javax.swing.JTable();
+        jButtonActualizar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -72,6 +74,11 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         });
 
         botonEditarEmpleado.setText("Editar");
+        botonEditarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEditarEmpleadoActionPerformed(evt);
+            }
+        });
 
         jTableEmpleado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,6 +101,13 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTableEmpleado);
 
+        jButtonActualizar.setText("Actualizar");
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("Inicio");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -115,7 +129,9 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(botonEliminarEmpleado)
-                .addGap(46, 46, 46)
+                .addGap(18, 18, 18)
+                .addComponent(jButtonActualizar)
+                .addGap(18, 18, 18)
                 .addComponent(botonEditarEmpleado)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -127,7 +143,7 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(nombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jTextFieldNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
                 .addComponent(buscar)
                 .addGap(0, 205, Short.MAX_VALUE))
@@ -139,7 +155,7 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextFieldNombreEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(buscar)
                     .addComponent(jLabel3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -149,13 +165,15 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonEliminarEmpleado)
-                    .addComponent(botonEditarEmpleado))
+                    .addComponent(botonEditarEmpleado)
+                    .addComponent(jButtonActualizar))
                 .addGap(58, 58, 58))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private FachadaEmpleado fachada = new FachadaEmpleado();
+    private String nombreAux = " ";
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         Inicio in = new Inicio();
@@ -163,10 +181,9 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenu1MouseClicked
 
-    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-
+    private void listar(String nombreEmpleado) {
         Empleado e = new Empleado();
-        e.setNombre(nombreEmpleado.getText());
+        e.setNombre(nombreEmpleado);
         try {
             ArrayList<Empleado> listaEmp = fachada.FachaEmpleadoListar(e);
             DefaultTableModel tablaEmpleadoModel = (DefaultTableModel) jTableEmpleado.getModel();
@@ -186,21 +203,48 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
                 Object[] data = {nombre, apellido, documento, direcc, email, cel, cuentaBanco, banco};
                 tablaEmpleadoModel.addRow(data);
             }
-            nombreEmpleado.setText("");
+            jTextFieldNombreEmpleado.setText("");
         } catch (EmpleadoNoValidoException ex) {
             Logger.getLogger(VentanaBusquedaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        listar(jTextFieldNombreEmpleado.getText());
     }//GEN-LAST:event_buscarActionPerformed
 
     private void botonEliminarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarEmpleadoActionPerformed
-        
+        Empleado e = new Empleado();
+        Integer row = jTableEmpleado.getSelectedRow();
+        Integer column = 2; //columna donde se encuentra el documento del empleado a eliminar
+        Integer documento = (Integer) jTableEmpleado.getModel().getValueAt(row, column);
+        e.setDocumento(documento);
+        nombreAux = (String) jTableEmpleado.getModel().getValueAt(row, 0);
+        try {
+            fachada.FachaEmoleadoEliminar(e);
+            JOptionPane.showMessageDialog(this, "Se eliminó el empleado: " + (String) jTableEmpleado.getModel().getValueAt(row, 0) + " de numero de documento: " + e.getDocumento());
+        } catch (EmpleadoNoValidoException ex) {
+            Logger.getLogger(VentanaBusquedaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_botonEliminarEmpleadoActionPerformed
+
+    private void botonEditarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarEmpleadoActionPerformed
+       
+        
+        
+        
+    }//GEN-LAST:event_botonEditarEmpleadoActionPerformed
+
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
+        listar(nombreAux);
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonEditarEmpleado;
     private javax.swing.JButton botonEliminarEmpleado;
     private javax.swing.JButton buscar;
+    private javax.swing.JButton jButtonActualizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -208,6 +252,6 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTableEmpleado;
-    private javax.swing.JTextField nombreEmpleado;
+    private javax.swing.JTextField jTextFieldNombreEmpleado;
     // End of variables declaration//GEN-END:variables
 }
