@@ -53,7 +53,6 @@ public class FachadaEmpleado {
     }
 
     public void fachaEmpleadoModificar(Empleado e) {
-
         pe.modificar(e);
     }
 }

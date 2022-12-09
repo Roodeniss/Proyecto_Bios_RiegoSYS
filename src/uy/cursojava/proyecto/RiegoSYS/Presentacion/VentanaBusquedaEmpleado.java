@@ -174,7 +174,6 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private FachadaEmpleado fachada = new FachadaEmpleado();
     private String nombreAux = " ";
-    private Integer doc = 0;
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         Inicio in = new Inicio();
@@ -210,9 +209,9 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         }
     }
 
-  
-    
+
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        nombreAux = jTextFieldNombreEmpleado.getText();
         listar(jTextFieldNombreEmpleado.getText());
     }//GEN-LAST:event_buscarActionPerformed
 
@@ -236,22 +235,48 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         Integer row = jTableEmpleado.getSelectedRow();
         Integer column = jTableEmpleado.getSelectedColumn();
         String NombreColumna = jTableEmpleado.getColumnName(column);
-        String contenido = (String)jTableEmpleado.getModel().getValueAt(row, column);
+        String contenido = (String) jTableEmpleado.getModel().getValueAt(row, column);
         switch (NombreColumna) {
-            case "Email":
+            case "Direccion"://row 3
+                e.setDirecc(contenido);
+                e.setEmail((String) jTableEmpleado.getModel().getValueAt(row, 4));
+                e.setNumCel((Integer) jTableEmpleado.getModel().getValueAt(row, 5));
+                e.setCueBanPago((Integer) jTableEmpleado.getModel().getValueAt(row, 6));
+                e.setBanco((String) jTableEmpleado.getModel().getValueAt(row, 7));
+                break;
+            case "Email"://row 4
                 e.setEmail(contenido);
+                e.setNumCel((Integer) jTableEmpleado.getModel().getValueAt(row, 5));
+                e.setCueBanPago((Integer) jTableEmpleado.getModel().getValueAt(row, 6));
+                e.setBanco((String) jTableEmpleado.getModel().getValueAt(row, 7));
+                e.setDirecc((String) jTableEmpleado.getModel().getValueAt(row, 3));
                 break;
-            case "Celular":
+            case "Celular"://row 5
                 e.setNumCel(Integer.valueOf(contenido));
+                e.setCueBanPago((Integer) jTableEmpleado.getModel().getValueAt(row, 6));
+                e.setBanco((String) jTableEmpleado.getModel().getValueAt(row, 7));
+                e.setDirecc((String) jTableEmpleado.getModel().getValueAt(row, 3));
+                e.setEmail((String) jTableEmpleado.getModel().getValueAt(row, 4));
                 break;
-            case "Cuenta Banco":
+            case "Cuenta Banco": //row 6
                 e.setCueBanPago(Integer.valueOf(contenido));
+                e.setDirecc((String) jTableEmpleado.getModel().getValueAt(row, 3));
+                e.setEmail((String) jTableEmpleado.getModel().getValueAt(row, 4));
+                e.setNumCel((Integer) jTableEmpleado.getModel().getValueAt(row, 5));
+                e.setBanco((String) jTableEmpleado.getModel().getValueAt(row, 7));
                 break;
-            case "Banco":
+            case "Banco"://row 7
                 e.setBanco(contenido);
+                e.setDirecc((String) jTableEmpleado.getModel().getValueAt(row, 3));
+                e.setEmail((String) jTableEmpleado.getModel().getValueAt(row, 4));
+                e.setNumCel((Integer) jTableEmpleado.getModel().getValueAt(row, 5));
+                e.setCueBanPago((Integer) jTableEmpleado.getModel().getValueAt(row, 6));
                 break;
-         
         }
+        Integer columnDoc = 2; //columna donde se encuentra el documento del empleado a eliminar
+        Integer documento = (Integer) jTableEmpleado.getModel().getValueAt(row, columnDoc);
+        e.setDocumento(documento);
+        fachada.fachaEmpleadoModificar(e);
     }//GEN-LAST:event_botonEditarEmpleadoActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed

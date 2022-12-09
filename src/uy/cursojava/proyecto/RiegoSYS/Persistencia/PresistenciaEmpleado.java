@@ -144,8 +144,12 @@ public class PresistenciaEmpleado {
         try {
             con = Conexion.conectar();
             ps = con.prepareStatement(SQL_CONSULTA_MODIFICACION_EMPLEADO);
-            ps.setString(1, empleado.getDocumento());
-
+            ps.setInt(1, empleado.getNumCel());
+            ps.setString(2, empleado.getDirecc());
+            ps.setString(3, empleado.getBanco());
+            ps.setInt(4, empleado.getCueBanPago());
+            ps.setString(5, empleado.getEmail());
+            ps.setInt(6, empleado.getDocumento());
             ps.executeUpdate();
         } catch (SQLException e) {
             // throw new BDException(e.getMessage());
@@ -155,5 +159,5 @@ public class PresistenciaEmpleado {
 
         }
     }
-
+//cel = ?,direccion = ?, banco=?, cuentabanco=?, email=? WHERE documento=?"
 }
