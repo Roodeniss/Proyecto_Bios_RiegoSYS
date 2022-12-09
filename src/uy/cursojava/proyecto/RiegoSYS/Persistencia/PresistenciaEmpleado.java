@@ -159,5 +159,4 @@ public class PresistenciaEmpleado {
 
         }
     }
-//cel = ?,direccion = ?, banco=?, cuentabanco=?, email=? WHERE documento=?"
 }
