@@ -20,12 +20,12 @@ public class FachadaEmpleado {
 
     private PresistenciaEmpleado pe = new PresistenciaEmpleado();
 
-    public Empleado FachaEmpleadoExiste(Empleado e) throws EmpleadoNoValidoException {
+    public Empleado fachaEmpleadoExiste(Empleado e) throws EmpleadoNoValidoException {
         Empleado empleadoRes = null;
         return empleadoRes = pe.existeEmpleado(e);
     }
 
-    public void FachaEmpleadoAgregar(Empleado e) throws EmpleadoNoValidoException {
+    public void fachaEmpleadoAgregar(Empleado e) throws EmpleadoNoValidoException {
         try {
             pe.agregar(e);
         } catch (BDException ex) {
@@ -33,7 +33,7 @@ public class FachadaEmpleado {
         }
     }
 
-    public void FachaEmoleadoEliminar(Empleado e) throws EmpleadoNoValidoException {
+    public void fachaEmoleadoEliminar(Empleado e) throws EmpleadoNoValidoException {
         try {
             pe.eliminar(e.getDocumento());
         } catch (BDException ex) {
@@ -41,7 +41,7 @@ public class FachadaEmpleado {
         }
     }
 
-    public ArrayList<Empleado> FachaEmpleadoListar(Empleado e) throws EmpleadoNoValidoException {
+    public ArrayList<Empleado> fachaEmpleadoListar(Empleado e) throws EmpleadoNoValidoException {
         ArrayList<Empleado> listaAux = null;
         try {
             listaAux = new ArrayList();
@@ -50,5 +50,10 @@ public class FachadaEmpleado {
             Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listaAux;
+    }
+
+    public void fachaEmpleadoModificar(Empleado e) {
+
+        pe.modificar(e);
     }
 }

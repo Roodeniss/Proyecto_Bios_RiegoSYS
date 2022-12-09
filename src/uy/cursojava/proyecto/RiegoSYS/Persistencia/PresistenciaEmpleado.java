@@ -22,13 +22,13 @@ import uy.cursojava.proyecto.RiegoSYS.Excepciones.PersistenciaException;
  */
 public class PresistenciaEmpleado {
 
-    private static final String SQL_CONSULTA_EXISTE_EMPLEADO = ("SELECT Cedula from Riego_SYS.Empleado WHERE Cedula=?");
-    private static final String SQL_CONSULTA_INSERT_EMPLEADO = ("INSERT INTO Riego_SYS.Empleado VALUES (?,?,?,?,?,?,?,?)");
-    private static final String PS_DELETE_EMPLEADO = ("DELETE FROM Riego_SYS.Empleado WHERE Cedula = ? ");
-    private static final String PS_SELECT_EMPLEADO_ALL = ("SELECT * FROM Riego_SYS.Empleado WHERE Nombre = ?");
-// private static final String SQL_CONSULTA_MODIFICACION_EMPLEADO = (" ");
-    
-//paso 1 : crear la conexion a la base
+    private static final String SQL_CONSULTA_EXISTE_EMPLEADO = ("SELECT documento from riego_sys.empleado WHERE documento=?");
+    private static final String SQL_CONSULTA_INSERT_EMPLEADO = ("INSERT INTO riego_sys.empleado VALUES (?,?,?,?,?,?,?,?)");
+    private static final String PS_DELETE_EMPLEADO = ("DELETE FROM riego_sys.empleado WHERE documento = ? ");
+    private static final String PS_SELECT_EMPLEADO_ALL = ("SELECT * FROM riego_sys.empleado WHERE nombre = ?");
+    private static final String SQL_CONSULTA_MODIFICACION_EMPLEADO = ("UPDATE riego_sys.empleado SET cel = ?,direccion = ?, banco=?, cuentabanco=?, email=? WHERE documento=?");
+
+    //paso 1 : crear la conexion a la base
     //paso 2 : crear el prepare statement
     //paso 3 : ejecutar la consulta del preparestatement
     //paso 4 : cargar los resultados en los objetos de la capa logical
@@ -44,7 +44,7 @@ public class PresistenciaEmpleado {
 
             while (rs.next()) {
                 empleadoRes = new Empleado();
-                empleadoRes.setDocumento(Integer.parseInt(rs.getString("Cedula")));
+                empleadoRes.setDocumento(Integer.parseInt(rs.getString("cedula")));
             }
         } catch (SQLException ex) {
             throw new EmpleadoNoValidoException("Tuve un problemita en la base, sql");
@@ -62,14 +62,14 @@ public class PresistenciaEmpleado {
         try {
             Connection con = Conexion.conectar();
             ps = con.prepareStatement(SQL_CONSULTA_INSERT_EMPLEADO);
-            ps.setString(1, e.getDocumento().toString());
-            ps.setString(2, e.getNombre().toLowerCase());
-            ps.setString(3, e.getApellido());
-            ps.setInt(4, e.getNumCel());
-            ps.setString(5, e.getDirecc());
-            ps.setString(6, e.getBanco());
-            ps.setString(7, e.getCueBanPago().toString());
-            ps.setString(8, e.getEmail());
+            ps.setString(1, e.getNombre().toLowerCase());
+            ps.setString(2, e.getApellido());
+            ps.setString(3, e.getDocumento().toString());
+            ps.setString(4, e.getEmail());
+            ps.setInt(5, e.getNumCel());
+            ps.setString(6, e.getDirecc());
+            ps.setString(7, e.getBanco());
+            ps.setString(8, e.getCueBanPago().toString());
             ps.execute();
         } catch (SQLException ex) {
             throw new BDException(ex.getMessage());
@@ -91,14 +91,14 @@ public class PresistenciaEmpleado {
             ps.setString(1, empleado.getNombre());
             rs = ps.executeQuery();
             while (rs.next()) {
-                Integer cedula = rs.getInt("Cedula");
-                String nombre = rs.getString("Nombre");
-                String apellido = rs.getString("Apellido");
-                Integer celular = rs.getInt("Celular");
-                String direcc = rs.getString("Direccion");
-                String banco = rs.getString("Banco");
-                Integer cuentaBanco = rs.getInt("CuentaBanco");
-                String email = rs.getString("Email");
+                Integer cedula = rs.getInt("documento");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                Integer celular = rs.getInt("cel");
+                String direcc = rs.getString("direccion");
+                String banco = rs.getString("banco");
+                Integer cuentaBanco = rs.getInt("cuentabanco");
+                String email = rs.getString("email");
                 Empleado e = new Empleado(banco, cuentaBanco);
                 e.setDocumento(cedula);
                 e.setNombre(nombre);
@@ -136,7 +136,24 @@ public class PresistenciaEmpleado {
         } finally {
 
         }
+    }
 
+    public static void modificar(Empleado empleado) {
+        PreparedStatement ps = null;
+        Connection con = null;
+        try {
+            con = Conexion.conectar();
+            ps = con.prepareStatement(SQL_CONSULTA_MODIFICACION_EMPLEADO);
+            ps.setString(1, empleado.getDocumento());
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            // throw new BDException(e.getMessage());
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+        }
     }
 
 }

@@ -92,7 +92,7 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true, true, true, true, true
+                false, false, false, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -123,10 +123,6 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane3)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(botonEliminarEmpleado)
                 .addGap(18, 18, 18)
@@ -147,6 +143,10 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(buscar)
                 .addGap(0, 205, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -174,6 +174,7 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     private FachadaEmpleado fachada = new FachadaEmpleado();
     private String nombreAux = " ";
+    private Integer doc = 0;
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         Inicio in = new Inicio();
@@ -185,7 +186,7 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         Empleado e = new Empleado();
         e.setNombre(nombreEmpleado);
         try {
-            ArrayList<Empleado> listaEmp = fachada.FachaEmpleadoListar(e);
+            ArrayList<Empleado> listaEmp = fachada.fachaEmpleadoListar(e);
             DefaultTableModel tablaEmpleadoModel = (DefaultTableModel) jTableEmpleado.getModel();
             jTableEmpleado.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
             tablaEmpleadoModel.setRowCount(0);
@@ -209,6 +210,8 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         }
     }
 
+  
+    
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         listar(jTextFieldNombreEmpleado.getText());
     }//GEN-LAST:event_buscarActionPerformed
@@ -221,7 +224,7 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         e.setDocumento(documento);
         nombreAux = (String) jTableEmpleado.getModel().getValueAt(row, 0);
         try {
-            fachada.FachaEmoleadoEliminar(e);
+            fachada.fachaEmoleadoEliminar(e);
             JOptionPane.showMessageDialog(this, "Se eliminó el empleado: " + (String) jTableEmpleado.getModel().getValueAt(row, 0) + " de numero de documento: " + e.getDocumento());
         } catch (EmpleadoNoValidoException ex) {
             Logger.getLogger(VentanaBusquedaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
@@ -229,10 +232,26 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
     }//GEN-LAST:event_botonEliminarEmpleadoActionPerformed
 
     private void botonEditarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarEmpleadoActionPerformed
-       
-        
-        
-        
+        Empleado e = new Empleado();
+        Integer row = jTableEmpleado.getSelectedRow();
+        Integer column = jTableEmpleado.getSelectedColumn();
+        String NombreColumna = jTableEmpleado.getColumnName(column);
+        String contenido = (String)jTableEmpleado.getModel().getValueAt(row, column);
+        switch (NombreColumna) {
+            case "Email":
+                e.setEmail(contenido);
+                break;
+            case "Celular":
+                e.setNumCel(Integer.valueOf(contenido));
+                break;
+            case "Cuenta Banco":
+                e.setCueBanPago(Integer.valueOf(contenido));
+                break;
+            case "Banco":
+                e.setBanco(contenido);
+                break;
+         
+        }
     }//GEN-LAST:event_botonEditarEmpleadoActionPerformed
 
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed

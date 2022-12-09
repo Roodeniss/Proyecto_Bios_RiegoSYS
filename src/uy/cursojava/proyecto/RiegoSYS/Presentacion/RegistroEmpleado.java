@@ -251,7 +251,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
 //            if (this.fachada.FachaEmpleadoExiste(e) != null) {
 //                JOptionPane.showMessageDialog(this, "El empleado: " + e.getNombre() + " ya existe");
 //            } else {
-                this.fachada.FachaEmpleadoAgregar(e);
+                this.fachada.fachaEmpleadoAgregar(e);
                 JOptionPane.showMessageDialog(this, "Se creó el empleado: " + e.getNombre());
                 limpiarCampos();
 //            }
