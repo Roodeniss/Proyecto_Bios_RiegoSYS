@@ -246,7 +246,7 @@ public class VentanaHoras extends javax.swing.JFrame {
         String tipoContrato = contrato.getTipoContrato();
         empleado.setSueldo(sueldo(entrada, salida, tipoContrato));
         fachada.fachaEmpleadoModificaHora(empleado);
-        JOptionPane.showMessageDialog(this, "Se registraron las horas del empleado: "+empleado.getNombre(), " ", JOptionPane.WARNING_MESSAGE);
+        JOptionPane.showMessageDialog(this, "Se registraron las horas del empleado: "+empleado.getNombre(), " ", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButtonRegistrarHoraActionPerformed
 
