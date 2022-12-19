@@ -8,10 +8,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.BDException;
+import uy.cursojava.proyecto.RiegoSYS.Excepciones.ContraroNoValidoException;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.EmpleadoNoValidoException;
 import uy.cursojava.proyecto.RiegoSYS.Presentacion.Inicio;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Contrato;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Empleado;
+import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaContrato;
 import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaEmpleado;
 //import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
 
@@ -24,8 +26,6 @@ public class RegistroEmpleado extends javax.swing.JFrame {
     /**
      * Creates new form empleadoDatos
      */
-  
-
     public RegistroEmpleado() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -231,7 +231,7 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private FachadaEmpleado fachada = new FachadaEmpleado();
-
+    private FachadaContrato fachadaCon = new FachadaContrato();
 
     private void jCrearEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCrearEmpleadoActionPerformed
         Empleado e = new Empleado();
@@ -248,17 +248,26 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         }
         e.setEmail(empleadoEmail.getText());
         e.setNombre(empleadoNombreTxt.getText());
+        Contrato contrato = new Contrato();
+        contrato.setTipoSalario((String) jComboBoxTipoSalario.getSelectedItem());
+        contrato.setTipoContrato((String) jComboBoxTipoContrato.getSelectedItem());
+        contrato.setEmpleado(e);
+        //  contrato.setNumeroContrato(fachada.numeroContrato(e)+1);
+        e.setContrato(contrato);
         try {
-//            if (this.fachada.FachaEmpleadoExiste(e) != null) {
-//                JOptionPane.showMessageDialog(this, "El empleado: " + e.getNombre() + " ya existe");
-//            } else {
-                this.fachada.fachaEmpleadoAgregar(e);
-                JOptionPane.showMessageDialog(this, "Se creó el empleado: " + e.getNombre());
-                limpiarCampos();
+            //            if (this.fachada.FachaEmpleadoExiste(e) != null) {
+            //                JOptionPane.showMessageDialog(this, "El empleado: " + e.getNombre() + " ya existe");
+            //            } else {
+            this.fachadaCon.fachaContratoAgregar(contrato);
+            this.fachada.fachaEmpleadoAgregar(e);
+            JOptionPane.showMessageDialog(this, "Se creó el empleado: " + e.getNombre());
+            limpiarCampos();
 //            }
         } catch (EmpleadoNoValidoException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, ex.getMessage());
+        } catch (ContraroNoValidoException ex) {
+            Logger.getLogger(RegistroEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_jCrearEmpleadoActionPerformed
@@ -269,16 +278,16 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenu1MouseClicked
 
-       private void limpiarCampos() {
-           empleadoApellidoTxt.setText(null);
-           empleadoBancoTxt.setText(null);
-           empleadoCITxt.setText(null);
-           empleadoNombreTxt.setText(null);
-           empleadoEmail.setText(null);
-           empleadoCITxt.setText(null);
-           empleadoCelularTxt.setText(null);
-           empleadoCuentabancoTxt.setText(null);
-           empleadoDireccionTxt.setText(null);
+    private void limpiarCampos() {
+        empleadoApellidoTxt.setText(null);
+        empleadoBancoTxt.setText(null);
+        empleadoCITxt.setText(null);
+        empleadoNombreTxt.setText(null);
+        empleadoEmail.setText(null);
+        empleadoCITxt.setText(null);
+        empleadoCelularTxt.setText(null);
+        empleadoCuentabancoTxt.setText(null);
+        empleadoDireccionTxt.setText(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -55,4 +55,17 @@ public class FachadaEmpleado {
     public void fachaEmpleadoModificar(Empleado e) {
         pe.modificar(e);
     }
+    
+    public Empleado fachaEmpladoRet(Empleado e){
+        Empleado ret = null;
+        return ret = pe.retornoEmpleado(e);
+    }
+    
+    public void fachaEmpleadoModificaHora(Empleado e){
+        pe.modificaHoras(e);
+    }
+    /*public Integer numeroContrato(Empleado e){
+        Empleado ret = pe.retornoEmpleado(e);
+        return ret.getContrato().getNumeroContrato();
+    }*/
 }

@@ -4,6 +4,22 @@
  */
 package uy.cursojava.proyecto.RiegoSYS.Presentacion;
 
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.JSpinner;
+import javax.swing.ListSelectionModel;
+import javax.swing.SpinnerDateModel;
+import javax.swing.table.DefaultTableModel;
+import uy.cursojava.proyecto.RiegoSYS.Excepciones.EmpleadoNoValidoException;
+import uy.cursojava.proyecto.RiegoSYS.Logica.Contrato;
+import uy.cursojava.proyecto.RiegoSYS.Logica.Empleado;
+import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaContrato;
+import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaEmpleado;
+
 /**
  *
  * @author rodrigodenis, rodrigo silveria, bruno rasetti
@@ -15,7 +31,7 @@ public class VentanaHoras extends javax.swing.JFrame {
      */
     public VentanaHoras() {
         initComponents();
-         this.setLocationRelativeTo(null);
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -28,16 +44,22 @@ public class VentanaHoras extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextFieldCedulaEmpleado = new javax.swing.JTextField();
+        jTextEmpleado = new javax.swing.JTextField();
         jButtonBusquedaEmpleado = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jListaEmpleados = new javax.swing.JList<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextFieldHoraEntrada = new javax.swing.JTextField();
-        jTextFieldHoraSalida = new javax.swing.JTextField();
         jButtonRegistrarHora = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTableEmpleado = new javax.swing.JTable();
+        Date dateEntrada = new Date();
+        SpinnerDateModel smEntrada =
+        new SpinnerDateModel(dateEntrada, null, null, Calendar.HOUR_OF_DAY);
+        jSpinnerHoraEntrada = new javax.swing.JSpinner(smEntrada);
+        Date dateSalida = new Date();
+        SpinnerDateModel smSalida =
+        new SpinnerDateModel(dateSalida, null, null, Calendar.HOUR_OF_DAY);
+        jSpinnerHoraSalida = new javax.swing.JSpinner(smSalida);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
 
@@ -46,16 +68,51 @@ public class VentanaHoras extends javax.swing.JFrame {
         jLabel1.setText("RegIstro de horas");
 
         jButtonBusquedaEmpleado.setText("Buscar");
-
-        jScrollPane1.setViewportView(jListaEmpleados);
+        jButtonBusquedaEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBusquedaEmpleadoActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Hora Entrada:");
 
         jLabel3.setText("Hora Salida:");
 
         jButtonRegistrarHora.setText("Registrar");
+        jButtonRegistrarHora.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRegistrarHoraActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Busqueda Empledo");
+
+        jTableEmpleado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nombre", "Apellido", "Documento"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTableEmpleado);
+
+        JSpinner.DateEditor deEntrada = new JSpinner.DateEditor(jSpinnerHoraEntrada, "HH:mm:ss");
+        jSpinnerHoraEntrada.setEditor(deEntrada);
+
+        JSpinner.DateEditor deSalida = new JSpinner.DateEditor(jSpinnerHoraSalida, "HH:mm:ss");
+        jSpinnerHoraSalida.setEditor(deSalida);
 
         jMenu1.setText("Inicio");
         jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -71,85 +128,160 @@ public class VentanaHoras extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(275, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addGap(286, 286, 286))
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextFieldCedulaEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButtonBusquedaEmpleado))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(45, 45, 45)
-                                .addComponent(jLabel4)
-                                .addGap(21, 21, 21)))
+                                .addComponent(jLabel4)))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButtonRegistrarHora)
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(jLabel2)
                                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
+                                .addGap(30, 30, 30)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextFieldHoraEntrada)
-                                    .addComponent(jTextFieldHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(50, 50, 50))))
+                                    .addComponent(jSpinnerHoraEntrada, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                                    .addComponent(jSpinnerHoraSalida))
+                                .addGap(62, 62, 62)))
+                        .addGap(20, 20, 20))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel4)
-                .addGap(1, 1, 1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextFieldCedulaEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonBusquedaEmpleado))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
+                        .addGap(101, 101, 101)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jTextFieldHoraEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jSpinnerHoraEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jTextFieldHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(217, 217, 217)
+                            .addComponent(jSpinnerHoraSalida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonRegistrarHora))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 344, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                        .addComponent(jLabel4)
+                        .addGap(1, 1, 1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonBusquedaEmpleado))
+                        .addGap(12, 12, 12)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        Inicio in =  new Inicio();
+        Inicio in = new Inicio();
         in.setVisible(true);
         this.setVisible(false);
+
     }//GEN-LAST:event_jMenu1MouseClicked
+    private FachadaEmpleado fachada = new FachadaEmpleado();
+    private FachadaContrato fachadaContrato = new FachadaContrato();
 
-   // this.getFechaActual().getDia() > 10 --> no se regitra el pago?
+    private void jButtonBusquedaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBusquedaEmpleadoActionPerformed
+        Empleado e = new Empleado();
+        e.setNombre(jTextEmpleado.getText());
+        try {
+            ArrayList<Empleado> listaEmp = fachada.fachaEmpleadoListar(e);
+            DefaultTableModel tablaEmpleadoModel = (DefaultTableModel) jTableEmpleado.getModel();
+            jTableEmpleado.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+            tablaEmpleadoModel.setRowCount(0);
+            Empleado empleado = null;
+            for (int i = 0; i < listaEmp.size(); i++) {
+                empleado = listaEmp.get(i);
+                String nombre = empleado.getNombre();
+                String apellido = empleado.getApellido();
+                Integer documento = empleado.getDocumento();
+                Object[] data = {nombre, apellido, documento};
+                tablaEmpleadoModel.addRow(data);
+            }
+            jTextEmpleado.setText("");
+        } catch (EmpleadoNoValidoException ex) {
+            Logger.getLogger(VentanaBusquedaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonBusquedaEmpleadoActionPerformed
 
-    
-    
+    private void jButtonRegistrarHoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegistrarHoraActionPerformed
+         if (java.time.LocalDate.now().getDayOfMonth() > 10) {
+            JOptionPane.showMessageDialog(this, "El registro de horas debe realizarse antes del 10 de cada mes!!", " ", JOptionPane.WARNING_MESSAGE);
+        } else {
+        Integer documento = (Integer) jTableEmpleado.getModel().getValueAt(jTableEmpleado.getSelectedRow(), 2);
+        Empleado auxEmpleado = new Empleado(documento);
+        Empleado empleado = fachada.fachaEmpladoRet(auxEmpleado);
+        Date salida = ((Date) jSpinnerHoraSalida.getModel().getValue());
+        Date entrada = ((Date) jSpinnerHoraEntrada.getModel().getValue());
+        Long horaTrabajo = horaTrabajo(entrada, salida);
+        empleado.setHoraTrabajo(horaTrabajo);
+        if (horaTrabajo < 8) {
+            empleado.setHoraExtra(0l);
+        } else {
+            empleado.setHoraExtra((horaTrabajo(entrada, salida) - 8l));
+        }
+        Contrato auxContrato = new Contrato(auxEmpleado);
+        Contrato contrato = fachadaContrato.fachaRetornoContrato(auxContrato);
+        String tipoContrato = contrato.getTipoContrato();
+        empleado.setSueldo(sueldo(entrada, salida, tipoContrato));
+        fachada.fachaEmpleadoModificaHora(empleado);
+        JOptionPane.showMessageDialog(this, "Se registraron las horas del empleado: "+empleado.getNombre(), " ", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButtonRegistrarHoraActionPerformed
+
+    private Long horaTrabajo(Date entrada, Date salida) {
+        Long cantHora = 0l;
+        if (entrada.compareTo(salida) > 0) {
+            JOptionPane.showMessageDialog(this, "La hora de entrada debe ser menor a la de salida", " ", JOptionPane.WARNING_MESSAGE);
+        } else if (entrada.compareTo(salida) == 0) {
+            JOptionPane.showMessageDialog(this, "La hora de entrada debe ser diferente a la de salida", " ", JOptionPane.WARNING_MESSAGE);
+        } else {
+            cantHora = entrada.getTime() - salida.getTime();
+            Long milisecs = salida.getTime() - entrada.getTime();
+            cantHora = (milisecs / (1000 * 60 * 60)) % 24;
+        }
+        return cantHora;
+    }
+
+    private Long sueldo(Date entrada, Date salida, String tipoContrato) {
+        Long sueldo = 0l;
+        Long cantHora = horaTrabajo(entrada, salida);
+        Long horaExtra = 0l;
+        if (cantHora > 8) {
+            horaExtra = cantHora - 8;
+        }
+        if (tipoContrato.equalsIgnoreCase("mensual")) {
+            sueldo = ((cantHora - horaExtra) * 1200) + (horaExtra * 2400);
+        } else if (tipoContrato.equalsIgnoreCase("jornalero")) {
+            sueldo = ((cantHora - horaExtra) * 1250) + (horaExtra * 2500);
+        }
+        return sueldo;
+    }
     /**
      * @param args the command line arguments
      */
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonBusquedaEmpleado;
     private javax.swing.JButton jButtonRegistrarHora;
@@ -157,12 +289,12 @@ public class VentanaHoras extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JList<String> jListaEmpleados;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextFieldCedulaEmpleado;
-    private javax.swing.JTextField jTextFieldHoraEntrada;
-    private javax.swing.JTextField jTextFieldHoraSalida;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JSpinner jSpinnerHoraEntrada;
+    private javax.swing.JSpinner jSpinnerHoraSalida;
+    private javax.swing.JTable jTableEmpleado;
+    private javax.swing.JTextField jTextEmpleado;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,6 +15,7 @@ import javax.swing.table.DefaultTableModel;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.BDException;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.EmpleadoNoValidoException;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Empleado;
+import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaContrato;
 import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaEmpleado;
 
 /**
@@ -173,6 +174,7 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     private FachadaEmpleado fachada = new FachadaEmpleado();
+    private FachadaContrato fachadaContrato = new FachadaContrato();
     private String nombreAux = " ";
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
@@ -223,6 +225,7 @@ public class VentanaBusquedaEmpleado extends javax.swing.JFrame {
         e.setDocumento(documento);
         nombreAux = (String) jTableEmpleado.getModel().getValueAt(row, 0);
         try {
+            fachadaContrato.fachaContratoEliminar(e.getDocumento());
             fachada.fachaEmoleadoEliminar(e);
             JOptionPane.showMessageDialog(this, "Se eliminó el empleado: " + (String) jTableEmpleado.getModel().getValueAt(row, 0) + " de numero de documento: " + e.getDocumento());
         } catch (EmpleadoNoValidoException ex) {

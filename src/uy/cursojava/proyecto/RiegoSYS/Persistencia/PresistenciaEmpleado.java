@@ -5,6 +5,7 @@
 package uy.cursojava.proyecto.RiegoSYS.Persistencia;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.BDException;
@@ -22,17 +23,19 @@ import uy.cursojava.proyecto.RiegoSYS.Excepciones.PersistenciaException;
  */
 public class PresistenciaEmpleado {
 
-    private static final String SQL_CONSULTA_EXISTE_EMPLEADO = ("SELECT documento from riego_sys.empleado WHERE documento=?");
-    private static final String SQL_CONSULTA_INSERT_EMPLEADO = ("INSERT INTO riego_sys.empleado VALUES (?,?,?,?,?,?,?,?)");
+    private static final String SQL_CONSULTA_EXISTE_EMPLEADO = ("SELECT documento FROM riego_sys.empleado WHERE documento=?");
+    private static final String SQL_CONSULTA_INSERT_EMPLEADO = ("INSERT INTO riego_sys.empleado VALUES (?,?,?,?,?,?,?,?,?,?,?)");
     private static final String PS_DELETE_EMPLEADO = ("DELETE FROM riego_sys.empleado WHERE documento = ? ");
     private static final String PS_SELECT_EMPLEADO_ALL = ("SELECT * FROM riego_sys.empleado WHERE nombre = ?");
     private static final String SQL_CONSULTA_MODIFICACION_EMPLEADO = ("UPDATE riego_sys.empleado SET cel = ?,direccion = ?, banco=?, cuentabanco=?, email=? WHERE documento=?");
+    private static final String SQL_CONSULTA_SELECT_EMPLEADO = ("SELECT * FROM riego_sys.empleado WHERE documento=?");
+    private static final String SQL_CONSULTA_MODIFICACION_EMPLEADO_HORA = ("UPDATE riego_sys.empleado SET  horatrabajo=?, horaextra=?, sueldo=?  WHERE documento = ?");
 
     //paso 1 : crear la conexion a la base
     //paso 2 : crear el prepare statement
     //paso 3 : ejecutar la consulta del preparestatement
     //paso 4 : cargar los resultados en los objetos de la capa logical
-    public Empleado existeEmpleado(Empleado e) throws EmpleadoNoValidoException {
+    public static Empleado existeEmpleado(Empleado e) throws EmpleadoNoValidoException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Empleado empleadoRes = null;
@@ -57,6 +60,34 @@ public class PresistenciaEmpleado {
         return empleadoRes;
     }
 
+    public static Empleado retornoEmpleado(Empleado e) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Empleado empleadoRet = null;
+        try {
+            Connection con = Conexion.conectar();
+            ps = (PreparedStatement) con.prepareStatement(SQL_CONSULTA_SELECT_EMPLEADO);
+            ps.setInt(1, e.getDocumento());
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                empleadoRet = new Empleado();
+                empleadoRet.setNombre(rs.getString("nombre"));
+                empleadoRet.setApellido(rs.getString("apellido"));
+                empleadoRet.setDocumento(rs.getInt("documento"));
+                empleadoRet.setBanco(rs.getString("banco"));
+                empleadoRet.setNumCel(rs.getInt("cel"));
+                empleadoRet.setDirecc(rs.getString("direccion"));
+                empleadoRet.setCueBanPago(rs.getInt("cuentabanco"));
+                empleadoRet.setEmail(rs.getString("email"));
+            }
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return empleadoRet;
+    }
+
     public static void agregar(Empleado e) throws BDException {
         PreparedStatement ps = null;
         try {
@@ -70,6 +101,10 @@ public class PresistenciaEmpleado {
             ps.setString(6, e.getDirecc());
             ps.setString(7, e.getBanco());
             ps.setString(8, e.getCueBanPago().toString());
+            ps.setLong(9, e.getHoraTrabajo());
+            ps.setLong(10, e.getHoraExtra());
+            ps.setLong(11, e.getSueldo());
+            //     ps.setObject(9, e.getContrato());
             ps.execute();
         } catch (SQLException ex) {
             throw new BDException(ex.getMessage());
@@ -150,6 +185,26 @@ public class PresistenciaEmpleado {
             ps.setInt(4, empleado.getCueBanPago());
             ps.setString(5, empleado.getEmail());
             ps.setInt(6, empleado.getDocumento());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            // throw new BDException(e.getMessage());
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+        }
+    }
+
+    public static void modificaHoras(Empleado empleado) {
+        PreparedStatement ps = null;
+        Connection con = null;
+        try {
+            con = Conexion.conectar();
+            ps = con.prepareStatement(SQL_CONSULTA_MODIFICACION_EMPLEADO_HORA);
+            ps.setLong(1, empleado.getHoraTrabajo());
+            ps.setLong(2, empleado.getHoraExtra());
+            ps.setLong(3, empleado.getSueldo());
+            ps.setInt(4, empleado.getDocumento());
             ps.executeUpdate();
         } catch (SQLException e) {
             // throw new BDException(e.getMessage());
