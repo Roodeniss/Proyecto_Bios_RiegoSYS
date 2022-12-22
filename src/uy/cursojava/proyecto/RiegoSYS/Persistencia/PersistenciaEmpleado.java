@@ -21,12 +21,13 @@ import uy.cursojava.proyecto.RiegoSYS.Excepciones.PersistenciaException;
  *
  * @author rodrigodenis
  */
-public class PresistenciaEmpleado {
+public class PersistenciaEmpleado {
 
     private static final String SQL_CONSULTA_EXISTE_EMPLEADO = ("SELECT documento FROM riego_sys.empleado WHERE documento=?");
     private static final String SQL_CONSULTA_INSERT_EMPLEADO = ("INSERT INTO riego_sys.empleado VALUES (?,?,?,?,?,?,?,?,?,?,?)");
     private static final String PS_DELETE_EMPLEADO = ("DELETE FROM riego_sys.empleado WHERE documento = ? ");
     private static final String PS_SELECT_EMPLEADO_ALL = ("SELECT * FROM riego_sys.empleado WHERE nombre = ?");
+    private static final String PS_SELECT_EMPLEADO = ("SELECT * FROM riego_sys.empleado");
     private static final String SQL_CONSULTA_MODIFICACION_EMPLEADO = ("UPDATE riego_sys.empleado SET cel = ?,direccion = ?, banco=?, cuentabanco=?, email=? WHERE documento=?");
     private static final String SQL_CONSULTA_SELECT_EMPLEADO = ("SELECT * FROM riego_sys.empleado WHERE documento=?");
     private static final String SQL_CONSULTA_MODIFICACION_EMPLEADO_HORA = ("UPDATE riego_sys.empleado SET  horatrabajo=?, horaextra=?, sueldo=?  WHERE documento = ?");
@@ -81,9 +82,9 @@ public class PresistenciaEmpleado {
                 empleadoRet.setEmail(rs.getString("email"));
             }
         } catch (PersistenciaException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
         return empleadoRet;
     }
@@ -109,10 +110,49 @@ public class PresistenciaEmpleado {
         } catch (SQLException ex) {
             throw new BDException(ex.getMessage());
         } catch (PersistenciaException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
         }
+    }
+    
+    public static ArrayList<Empleado> listarEmpleados() throws BDException{
+        PreparedStatement ps = null;
+        Connection con = null;
+        ResultSet rs = null;
+        ArrayList<Empleado> listaEmpleado = new ArrayList();
+        try {
+            con = Conexion.conectar();
+            ps = con.prepareStatement(PS_SELECT_EMPLEADO);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Integer cedula = rs.getInt("documento");
+                String nombre = rs.getString("nombre");
+                String apellido = rs.getString("apellido");
+                Integer celular = rs.getInt("cel");
+                String direcc = rs.getString("direccion");
+                String banco = rs.getString("banco");
+                Integer cuentaBanco = rs.getInt("cuentabanco");
+                String email = rs.getString("email");
+                Long sueldo = rs.getLong("sueldo");
+                Empleado e = new Empleado(banco, cuentaBanco);
+                e.setDocumento(cedula);
+                e.setNombre(nombre);
+                e.setApellido(apellido);
+                e.setNumCel(celular);
+                e.setDirecc(direcc);
+                e.setEmail(email);
+                e.setSueldo(sueldo);
+                listaEmpleado.add(e);
+            }
+        } catch (SQLException ex) {
+            throw new BDException("Error al obtener los datos de los Empleados.");
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PersistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+        }
+        return listaEmpleado;
     }
 
     public static ArrayList<Empleado> listarTodos(Empleado empleado) throws BDException {
@@ -146,7 +186,7 @@ public class PresistenciaEmpleado {
         } catch (SQLException ex) {
             throw new BDException("Error al obtener los datos de los Empleados.");
         } catch (PersistenciaException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
         }
@@ -167,7 +207,7 @@ public class PresistenciaEmpleado {
         } catch (SQLException | BDException e) {
             throw new BDException("Error al borrar el empleado.");
         } catch (PersistenciaException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
         }
@@ -189,7 +229,7 @@ public class PresistenciaEmpleado {
         } catch (SQLException e) {
             // throw new BDException(e.getMessage());
         } catch (PersistenciaException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
         }
@@ -209,7 +249,7 @@ public class PresistenciaEmpleado {
         } catch (SQLException e) {
             // throw new BDException(e.getMessage());
         } catch (PersistenciaException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
         }
