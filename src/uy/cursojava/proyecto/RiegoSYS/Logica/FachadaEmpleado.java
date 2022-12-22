@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.BDException;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.EmpleadoNoValidoException;
-import uy.cursojava.proyecto.RiegoSYS.Persistencia.PresistenciaEmpleado;
+import uy.cursojava.proyecto.RiegoSYS.Persistencia.PersistenciaEmpleado;
 
 /**
  *
@@ -18,7 +18,7 @@ import uy.cursojava.proyecto.RiegoSYS.Persistencia.PresistenciaEmpleado;
  */
 public class FachadaEmpleado {
 
-    private PresistenciaEmpleado pe = new PresistenciaEmpleado();
+    private PersistenciaEmpleado pe = new PersistenciaEmpleado();
 
     public Empleado fachaEmpleadoExiste(Empleado e) throws EmpleadoNoValidoException {
         Empleado empleadoRes = null;
@@ -47,6 +47,17 @@ public class FachadaEmpleado {
             listaAux = new ArrayList();
             listaAux = pe.listarTodos(e);
         } catch (BDException ex) {
+            Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaAux;
+    }
+    
+    public ArrayList<Empleado> fachaEmpleadoLista()throws EmpleadoNoValidoException{
+        ArrayList<Empleado> listaAux = null;
+        try{
+            listaAux= new ArrayList();
+            listaAux =  pe.listarEmpleados();
+        }catch (BDException ex) {
             Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
         return listaAux;

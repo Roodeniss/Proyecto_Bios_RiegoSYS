@@ -4,33 +4,45 @@
  */
 package uy.cursojava.proyecto.RiegoSYS.Logica;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.BDException;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.ContraroNoValidoException;
 import uy.cursojava.proyecto.RiegoSYS.Persistencia.PersistenciaContrato;
 
-
 /**
  *
  * @author rodrigodenis
  */
 public class FachadaContrato {
+
     PersistenciaContrato pc = new PersistenciaContrato();
-    
-     public void fachaContratoAgregar(Contrato c) throws ContraroNoValidoException {
+
+    public void fachaContratoAgregar(Contrato c) throws ContraroNoValidoException {
         try {
             pc.agregar(c);
         } catch (BDException ex) {
             Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
-    public Contrato fachaRetornoContrato(Contrato c){
+
+    public ArrayList<Contrato> fachalistarContrato(){
+       ArrayList<Contrato> listaRet = null;
+        try {
+            listaRet = new ArrayList();
+            listaRet = pc.listarContrato();
+        } catch (BDException ex) {
+            Logger.getLogger(FachadaContrato.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listaRet;
+    }
+    
+    public Contrato fachaRetornoContrato(Contrato c) {
         return pc.retContrato(c);
     }
-     
-    public void fachaContratoEliminar(Integer cedula){
+
+    public void fachaContratoEliminar(Integer cedula) {
         try {
             pc.eliminar(cedula);
         } catch (BDException ex) {

@@ -60,7 +60,7 @@ public class PersistenciaCliente {
         } catch (SQLException ex) {
             throw new BDException("Error al obtener los datos de los Cliente.");
         } catch (PersistenciaException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
         }
@@ -82,7 +82,7 @@ public class PersistenciaCliente {
         } catch (SQLException ex) {
             throw new BDException(ex.getMessage());
         } catch (PersistenciaException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
         }

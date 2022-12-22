@@ -48,6 +48,8 @@ public class Login extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         bottonAceptar.setText("Aceptar");
+        bottonAceptar.setMaximumSize(new java.awt.Dimension(98, 29));
+        bottonAceptar.setMinimumSize(new java.awt.Dimension(98, 29));
         bottonAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bottonAceptarActionPerformed(evt);

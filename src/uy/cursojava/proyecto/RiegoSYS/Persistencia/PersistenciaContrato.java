@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import uy.cursojava.proyecto.RiegoSYS.Excepciones.BDException;
@@ -24,6 +25,7 @@ public class PersistenciaContrato {
     private static final String SQL_CONSULTA_INSERT_CONTRATO = ("INSERT INTO riego_sys.contrato VALUES (?,?,?)");
     private static final String PS_DELETE_CONTRATO = ("DELETE FROM riego_sys.contrato WHERE documento = ? ");
     private static final String SQL_CONSULTA_SELECT_CONTRATO = ("SELECT * FROM riego_sys.contrato WHERE empleado=?");
+    private static final String PS_SELECT_CONTRATO_ALL = ("SELECT * FROM riego_sys.contrato");
     // private static final String SQL_CONSULTA_JOIN_EMPLEADO_CONTRATO = ("SELECT riego_sys.empleado.nombre, riego_sys.empleado.apellido, riego_sys.empleado.documento, riego_sys.empleado.email, riego_sys.empleado.cel, riego_sys.empleado.direccion, riego_sys.empleado.banco, riego_sys.empleado.cuentabanco FROM riego_sys.empleado LEFT JOIN riego_sys.contrato ON riego_sys.empleado.documento=riego_sys.contrato.empleado");
 
     public static void agregar(Contrato c) throws BDException {
@@ -38,10 +40,43 @@ public class PersistenciaContrato {
         } catch (SQLException ex) {
             throw new BDException(ex.getMessage());
         } catch (PersistenciaException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaContrato.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
         }
+    }
+
+    public static ArrayList<Contrato> listarContrato() throws BDException {
+        PreparedStatement ps = null;
+        Connection con = null;
+        ResultSet rs = null;
+        ArrayList<Contrato> listaContrato = new ArrayList();
+        try {
+            con = Conexion.conectar();
+            ps = con.prepareStatement(PS_SELECT_CONTRATO_ALL);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Integer documento = rs.getInt("empleado");
+                Empleado aux = new Empleado();
+                aux.setDocumento(documento);
+                Empleado e = new Empleado();
+                e =  PersistenciaEmpleado.retornoEmpleado(aux);
+                String tipoContrato = rs.getString("tipocontrato");
+                String tipoSalario = rs.getString("tiposalario");
+                Contrato c = new Contrato();
+                c.setEmpleado(e);
+                c.setTipoContrato(tipoContrato);
+                c.setTipoSalario(tipoSalario);
+                listaContrato.add(c);
+            }
+        } catch (SQLException ex) {
+            throw new BDException("Error al obtener los datos de los Contratos.");
+        } catch (PersistenciaException ex) {
+            Logger.getLogger(PersistenciaContrato.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
+        }
+        return listaContrato;
     }
 
     public static Contrato retContrato(Contrato c) {
@@ -50,7 +85,7 @@ public class PersistenciaContrato {
         Contrato contratoRet = null;
         try {
             Empleado aux = new Empleado(c.getEmpleado().getDocumento());
-            Empleado e = PresistenciaEmpleado.retornoEmpleado(aux);
+            Empleado e = PersistenciaEmpleado.retornoEmpleado(aux);
             Connection con = Conexion.conectar();
             ps = (PreparedStatement) con.prepareStatement(SQL_CONSULTA_SELECT_CONTRATO);
             ps.setInt(1, c.getEmpleado().getDocumento());
@@ -62,9 +97,9 @@ public class PersistenciaContrato {
                 contratoRet.setTipoSalario(rs.getString("tiposalario"));
             }
         } catch (PersistenciaException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaContrato.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaContrato.class.getName()).log(Level.SEVERE, null, ex);
         }
         return contratoRet;
     }
@@ -83,7 +118,7 @@ public class PersistenciaContrato {
         } catch (SQLException | BDException e) {
             throw new BDException("Error al borrar el contrato.");
         } catch (PersistenciaException ex) {
-            Logger.getLogger(PresistenciaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaContrato.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 
         }
