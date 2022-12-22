@@ -6,7 +6,7 @@ package uy.cursojava.proyecto.RiegoSYS.Logica;
 
 /**
  *
- * @author rodrigo denis, rodrigo silveria, bruno rasetti
+ * @author Rodrigo Denis, rodrigo silveria, bruno rasetti
  */
 public class Empleado extends Persona {
 
