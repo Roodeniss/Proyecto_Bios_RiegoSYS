@@ -235,41 +235,46 @@ public class RegistroEmpleado extends javax.swing.JFrame {
 
     private void jCrearEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCrearEmpleadoActionPerformed
         Empleado e = new Empleado();
-        e.setApellido(empleadoApellidoTxt.getText());
-        e.setBanco(empleadoCuentabancoTxt.getText());
-        //e.setContrato(tipoContrato(empleadoTipoCon.getText(), empleadoTipoSalario.getText()));
-        e.setCueBanPago(Integer.valueOf(empleadoCuentabancoTxt.getText()));
-        e.setDirecc(empleadoDireccionTxt.getText());
-        try {
-            e.setDocumento(Integer.valueOf(empleadoCITxt.getText()));
-            e.setNumCel(Integer.valueOf(empleadoCelularTxt.getText()));
-        } catch (NumberFormatException c) {
-            jLabelError.setText("Ingrese bien el su Documento o su Numero de Celular"); //cambiar por jOptionPane
-        }
-        e.setEmail(empleadoEmail.getText());
-        e.setNombre(empleadoNombreTxt.getText());
-        Contrato contrato = new Contrato();
-        contrato.setTipoSalario((String) jComboBoxTipoSalario.getSelectedItem());
-        contrato.setTipoContrato((String) jComboBoxTipoContrato.getSelectedItem());
-        contrato.setEmpleado(e);
-        //  contrato.setNumeroContrato(fachada.numeroContrato(e)+1);
-        e.setContrato(contrato);
-        try {
-            //            if (this.fachada.FachaEmpleadoExiste(e) != null) {
-            //                JOptionPane.showMessageDialog(this, "El empleado: " + e.getNombre() + " ya existe");
-            //            } else {
-            this.fachadaCon.fachaContratoAgregar(contrato);
-            this.fachada.fachaEmpleadoAgregar(e);
-            JOptionPane.showMessageDialog(this, "Se creó el empleado: " + e.getNombre());
-            limpiarCampos();
-//            }
-        } catch (EmpleadoNoValidoException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(this, ex.getMessage());
-        } catch (ContraroNoValidoException ex) {
-            Logger.getLogger(RegistroEmpleado.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        if (!camposLimpios()) {
+            e.setApellido(empleadoApellidoTxt.getText());
+            e.setBanco(empleadoCuentabancoTxt.getText());
+            //e.setContrato(tipoContrato(empleadoTipoCon.getText(), empleadoTipoSalario.getText()));
+            e.setCueBanPago(Integer.valueOf(empleadoCuentabancoTxt.getText()));
+            e.setDirecc(empleadoDireccionTxt.getText());
+            try {
+                e.setDocumento(Integer.valueOf(empleadoCITxt.getText()));
+                e.setNumCel(Integer.valueOf(empleadoCelularTxt.getText()));
+            } catch (NumberFormatException c) {
+                jLabelError.setText("Ingrese bien el su Documento o su Numero de Celular"); //cambiar por jOptionPane
+            }
+            e.setEmail(empleadoEmail.getText());
+            e.setNombre(empleadoNombreTxt.getText());
+            Contrato contrato = new Contrato();
+            contrato.setTipoSalario((String) jComboBoxTipoSalario.getSelectedItem());
+            contrato.setTipoContrato((String) jComboBoxTipoContrato.getSelectedItem());
+            contrato.setEmpleado(e);
+            //  contrato.setNumeroContrato(fachada.numeroContrato(e)+1);
+            e.setContrato(contrato);
+            try {
+                //            if (this.fachada.FachaEmpleadoExiste(e) != null) {
+                //                JOptionPane.showMessageDialog(this, "El empleado: " + e.getNombre() + " ya existe");
+                //            } else {
 
+                this.fachadaCon.fachaContratoAgregar(contrato);
+                this.fachada.fachaEmpleadoAgregar(e);
+                JOptionPane.showMessageDialog(this, "Se creó el empleado: " + e.getNombre());
+                limpiarCampos();
+
+//            }
+            } catch (EmpleadoNoValidoException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (ContraroNoValidoException ex) {
+                Logger.getLogger(RegistroEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe rellenar todos los campos");
+        }
     }//GEN-LAST:event_jCrearEmpleadoActionPerformed
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
@@ -278,13 +283,23 @@ public class RegistroEmpleado extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jMenu1MouseClicked
 
+    private Boolean camposLimpios() {
+        Boolean ret = false;
+        if (empleadoApellidoTxt.getText().equalsIgnoreCase("") || empleadoBancoTxt.getText().equalsIgnoreCase("")
+                || empleadoCITxt.getText().equalsIgnoreCase("") || empleadoNombreTxt.getText().equalsIgnoreCase("")
+                || empleadoEmail.getText().equalsIgnoreCase("") || empleadoCelularTxt.getText().equalsIgnoreCase("")
+                || empleadoCuentabancoTxt.getText().equalsIgnoreCase("") || empleadoDireccionTxt.getText().equalsIgnoreCase("")) {
+            ret = true;
+        }
+        return ret;
+    }
+
     private void limpiarCampos() {
         empleadoApellidoTxt.setText(null);
         empleadoBancoTxt.setText(null);
         empleadoCITxt.setText(null);
         empleadoNombreTxt.setText(null);
         empleadoEmail.setText(null);
-        empleadoCITxt.setText(null);
         empleadoCelularTxt.setText(null);
         empleadoCuentabancoTxt.setText(null);
         empleadoDireccionTxt.setText(null);
