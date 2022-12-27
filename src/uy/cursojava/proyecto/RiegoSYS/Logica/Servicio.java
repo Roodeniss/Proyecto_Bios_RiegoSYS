@@ -4,6 +4,7 @@
  */
 package uy.cursojava.proyecto.RiegoSYS.Logica;
 
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -16,11 +17,11 @@ public class Servicio {
     private Empleado empleado;
     private Cliente cliente;
     private String tipoServicio;
-    private String fecha;
+    private LocalDate fecha;
     
     /*     Constructores         */
     
-    public Servicio(Empleado empleado, String tipoServicio, String fecha) {
+    public Servicio(Empleado empleado, String tipoServicio, LocalDate fecha) {
         this.empleado = empleado;
         this.tipoServicio = tipoServicio;
         this.fecha = fecha;
@@ -57,11 +58,11 @@ public class Servicio {
         this.tipoServicio = tipoServicio;
     }
 
-    public String getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(String fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

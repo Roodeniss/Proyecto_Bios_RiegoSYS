@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 import java.util.Date;
 import java.util.logging.Level;
@@ -64,27 +65,17 @@ public class PersistenciaServicio {
             ps.setInt(1, servicio.getEmpleado().getDocumento());
             ps.setInt(2, servicio.getCliente().getDocumento());
 
-            //convertir la fecha de String a Date
-            String fechaSer = servicio.getFecha();
+            //convertir la fecha de LocalDate a sql.Date
+            LocalDate fechaSer = servicio.getFecha();
 
-            // 2022-12-04
-            // "01/12/2022"
-            /*
-             String fechaSerAux = servicio.getFecha();
-            String[] vec = fechaSerAux.split("-");
-            String fechaSer = vec[2] + "/" + vec[1] + "/" + vec[0];
-             */
             SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
-            Date parsed = format.parse(fechaSer);
-            java.sql.Date sqlFecha = new java.sql.Date(parsed.getTime());
+            java.sql.Date sqlFecha = java.sql.Date.valueOf(fechaSer);
             ps.setDate(3, sqlFecha);
             ps.setString(4, servicio.getTipoServicio());
             ps.execute();
         } catch (SQLException ex) {
             throw new ServicioNoValidoException("No pude instertar el servicio , perdon ");
         } catch (PersistenciaException ex) {
-            Logger.getLogger(PersistenciaServicio.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
             Logger.getLogger(PersistenciaServicio.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
 

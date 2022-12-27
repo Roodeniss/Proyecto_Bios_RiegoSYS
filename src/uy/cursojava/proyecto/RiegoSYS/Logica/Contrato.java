@@ -35,12 +35,6 @@ public class Contrato {
         // this.numeroContrato = 0;
     }
 
-    /*
-    tipoC y tipoS son enteros, 1 o 2, que idicarán el tipo de contrato y de salario, es
-    decir que si tipoC = 1 el contrato será mensual y si tipoC = 2 será jornarelo.
-    lo mismo para tipoS, si tipoS = 1 su sueldo será mensual y si tipoS = 2 su sueldo 
-    será por quincena.
-     */
 
  /*   Getter y setter     */
     public String getTipoContrato() {

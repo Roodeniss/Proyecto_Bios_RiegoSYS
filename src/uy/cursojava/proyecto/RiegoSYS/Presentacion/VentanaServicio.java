@@ -173,7 +173,7 @@ public class VentanaServicio extends javax.swing.JFrame {
         servicio.setCliente(cliente);
         servicio.setTipoServicio(obtenerTipoServicio());
        // servicio.setFecha(datePickerServicio.getText());
-        servicio.setFecha(datePickerServicio.getDate().toString());
+        servicio.setFecha(datePickerServicio.getDate());
         fachada.agregarServicio(servicio);
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Debe ingresar una C.I valida: ");
