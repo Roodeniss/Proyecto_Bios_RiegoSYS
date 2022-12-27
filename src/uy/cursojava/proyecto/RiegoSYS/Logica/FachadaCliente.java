@@ -23,28 +23,46 @@ import uy.cursojava.proyecto.RiegoSYS.Persistencia.PersistenciaCliente;
  */
 public class FachadaCliente {
     
-    private PersistenciaCliente pe = new PersistenciaCliente();
+      
+    private PersistenciaCliente pc = new PersistenciaCliente();
 
+    public Cliente fachaClienteExiste(Cliente c) throws ClienteNoValidoException {
+        Cliente clienteRes = null;
+        return clienteRes = pc.existeCliente(c);
+    }
+    
+    
     public void FachaClienteAgregar(Cliente c) throws ClienteNoValidoException {
         try {
-            pe.agregar(c);
+            pc.agregar(c);
         } catch (BDException ex) {
-            Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(FachadaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
- public DefaultListModel FachaClienteListar(Cliente c) {
-       DefaultListModel<Cliente> retorno = new DefaultListModel();
+ public ArrayList<Cliente> fachaClienteListar(Cliente c) throws ClienteNoValidoException {
+        ArrayList<Cliente> listaCli = null;
         try {
-            ArrayList<Cliente> listaAux = new ArrayList();
-            listaAux = pe.listarTodos(c);
-            for (int i = 0; i < listaAux.size(); i++) {
-                retorno.addElement(listaAux.get(i));
-            }
-        } catch (BDException ex) {
-            Logger.getLogger(FachadaEmpleado.class.getName()).log(Level.SEVERE, null, ex);
+            listaCli = new ArrayList();
+            listaCli = pc.listarTodos(c);
+             } catch (BDException ex) {
+            Logger.getLogger(FachadaCliente.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return retorno;
+        return listaCli;
     }
-    
+     public void fachaClienteEliminar(Cliente c) throws ClienteNoValidoException {
+        try {
+            pc.eliminar(c.getDocumento());
+        } catch (BDException ex) {
+            Logger.getLogger(FachadaCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }
+     public void fachaClienteModificar(Cliente c) {
+        pc.modificar(c);
+    }
+     public Cliente fachaClienteRet(Cliente c){
+        Cliente ret = null;
+        return ret = pc.retornoCliente(c);
+    }
 }

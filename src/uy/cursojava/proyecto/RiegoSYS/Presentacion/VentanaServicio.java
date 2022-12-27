@@ -4,11 +4,17 @@
  */
 package uy.cursojava.proyecto.RiegoSYS.Presentacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import uy.cursojava.proyecto.RiegoSYS.Excepciones.ClienteNoValidoException;
+import uy.cursojava.proyecto.RiegoSYS.Excepciones.ServicioNoValidoException;
 
 import uy.cursojava.proyecto.RiegoSYS.Logica.Cliente;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Empleado;
+import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaServicio;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Servicio;
+import uy.cursojava.proyecto.RiegoSYS.Presentacion.Inicio;
 //import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
 
 /**
@@ -47,10 +53,10 @@ public class VentanaServicio extends javax.swing.JFrame {
         datePickerServicio = new com.github.lgooddatepicker.components.DatePicker();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        cedulaEmpleado.setText(" ");
         cedulaEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cedulaEmpleadoActionPerformed(evt);
@@ -66,8 +72,6 @@ public class VentanaServicio extends javax.swing.JFrame {
         jLabel3.setText("Cliente:");
 
         jLabel4.setText("Fecha realización:");
-
-        jDocumentoCli.setText(" ");
 
         jBotonAddServicio.setText("Agregar");
         jBotonAddServicio.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +90,9 @@ public class VentanaServicio extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu1);
 
+        jMenu2.setText("Edit");
+        jMenuBar1.add(jMenu2);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -95,59 +102,102 @@ public class VentanaServicio extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(207, 207, 207)
+                        .addGap(179, 179, 179)
                         .addComponent(jLabel5))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(idProd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jDocumentoCli)
-                                .addComponent(datePickerServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(cedulaEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(153, Short.MAX_VALUE))
+                        .addGap(32, 32, 32)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(datePickerServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(idProd, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jDocumentoCli)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(43, 43, 43)
+                                .addComponent(cedulaEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(72, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jBotonAddServicio)
-                .addGap(27, 27, 27))
+                .addGap(44, 44, 44))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addContainerGap(24, Short.MAX_VALUE)
                 .addComponent(jLabel5)
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(cedulaEmpleado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(idProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jDocumentoCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(49, 49, 49))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(datePickerServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel4)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(idProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jDocumentoCli, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(datePickerServicio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addComponent(jBotonAddServicio)
-                .addGap(23, 23, 23))
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+ 
+    private FachadaServicio fachada = new FachadaServicio();
+    
+    private void crearServicio() throws ServicioNoValidoException {
+      
+      Servicio servicio= new Servicio();
+      Empleado empleado = new Empleado();
+      Cliente cliente = new Cliente();
+        
+        try { 
+        empleado.setDocumento(Integer.valueOf(cedulaEmpleado.getText()));
+        cliente.setDocumento(Integer.valueOf(jDocumentoCli.getText()));
+        servicio.setEmpleado(empleado);
+        servicio.setCliente(cliente);
+        servicio.setTipoServicio(obtenerTipoServicio());
+       // servicio.setFecha(datePickerServicio.getText());
+        servicio.setFecha(datePickerServicio.getDate().toString());
+        fachada.agregarServicio(servicio);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Debe ingresar una C.I valida: ");
+       }
+      }
+        //try {
+//            
+                //this.fachada.agregarServicio(servicio);
+                //JOptionPane.showMessageDialog(this, "Se creó el servicio: " );
+                //limpiarCampos();
+//            }
+       // } catch (ServicioNoValidoException ex) {
+          //  Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+           // JOptionPane.showMessageDialog(this, ex.getMessage());
+    //}
+        
+        
+        //}
+    
+   // private void limpiarCampos() {
+          // cedulaEmpleado.setText(null);
+           //jDocumentoCli.setText(null);
+           //datePickerServicio.setText(null);
+          // }
+      
+  
     private void cedulaEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cedulaEmpleadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cedulaEmpleadoActionPerformed
@@ -157,50 +207,20 @@ public class VentanaServicio extends javax.swing.JFrame {
         in.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_jMenu1MouseClicked
-
+ 
+    
     private void jBotonAddServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonAddServicioActionPerformed
-        Servicio s = new Servicio();
-        s.setTipoServicio(obtenerTipoServicio());
-        if (cedulaEmpleado.getText().equalsIgnoreCase("")) {
-            s.setEmpleado(obtenerEmpleado(cedulaEmpleado.getText()));
-        } else {
-            JOptionPane.showMessageDialog(this,"Debe ingresar un documentoe valido para el empleado "," ",JOptionPane.WARNING_MESSAGE);
+        try {
+            crearServicio();
+        } catch (ServicioNoValidoException ex) {
+            Logger.getLogger(VentanaServicio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if (!jDocumentoCli.getText().equalsIgnoreCase("")) {
-            s.setCliente(obtenerCliente(jDocumentoCli.getText()));
-        } else {
-            JOptionPane.showMessageDialog(this,"Debe ingresar un documentoe valido para el cliente","", JOptionPane.WARNING_MESSAGE);
-        }
-        s.setFecha(datePickerServicio.getText());
     }//GEN-LAST:event_jBotonAddServicioActionPerformed
 
-    private String obtenerTipoServicio() {
+      
+private String obtenerTipoServicio() {
         return idProd.getItemAt(idProd.getSelectedIndex());
 
-    }
-
-    private Cliente obtenerCliente(String s) {
-        Cliente retorno = new Cliente();
-        //if (/*!s.equalsIgnoreCase("") &&*/sis.getListaCliente().size() != 0) {
-//            for (int i = 0; i < sis.getListaCliente().size(); i++) {
-//                if (sis.getListaCliente().get(i).getDocumento() == Integer.parseInt(s)) {
-//                    retorno = sis.getListaCliente().get(i);
-//                }
-           // }
-      //  }
-        return retorno;
-    }
-
-    private Empleado obtenerEmpleado(String s) {
-        Empleado retorno = new Empleado();
-        //if (!s.equalsIgnoreCase(s) && sis.getListaEmpleado().size() != 0) {
-           // for (int i = 0; i < sis.getListaEmpleado().size(); i++) {
-       //         if (sis.getListaEmpleado().get(i).getDocumento() == Integer.parseInt(s)) {
-       //             retorno = sis.getListaEmpleado().get(i);
-     //           }
-     //       }
-    //    }
-        return retorno;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -215,6 +235,7 @@ public class VentanaServicio extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

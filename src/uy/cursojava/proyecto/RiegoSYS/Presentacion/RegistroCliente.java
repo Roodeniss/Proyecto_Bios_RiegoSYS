@@ -4,6 +4,10 @@
  */
 package uy.cursojava.proyecto.RiegoSYS.Presentacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import uy.cursojava.proyecto.RiegoSYS.Excepciones.ClienteNoValidoException;
 import uy.cursojava.proyecto.RiegoSYS.Logica.Cliente;
 import uy.cursojava.proyecto.RiegoSYS.Logica.FachadaCliente;
 //import uy.cursojava.proyecto.RiegoSYS.Sistema.Sistema;
@@ -17,8 +21,6 @@ public class RegistroCliente extends javax.swing.JFrame {
     /**
      * Creates new form RegistroClientes
      */
-    
-    
     public RegistroCliente() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -50,7 +52,6 @@ public class RegistroCliente extends javax.swing.JFrame {
         jLabelError = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,9 +88,6 @@ public class RegistroCliente extends javax.swing.JFrame {
             }
         });
         jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Edit");
-        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -167,37 +165,68 @@ public class RegistroCliente extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-     private FachadaCliente fachada = new FachadaCliente();
-    
-    private void crearCli() {
-        Cliente c = new Cliente();
-        c.setApellido(apellidoCli.getText());
-        c.setDirecc(direcCli.getText());
-        try {
-            c.setDocumento(Integer.parseInt(cedulaCli.getText()));
-            c.setNumCel(Integer.parseInt(celuCli.getText()));
-        } catch (NumberFormatException e) {
-            jLabelError.setText("Debe ingresar un Número de telefono o C.I valida");
-        }
-        c.setEmail(emailCle.getText());
-        c.setNombre(nombreCli.getText());
-        
-        try{
-        
-        }catch(NullPointerException e){
-             jLabelError.setText("Debe ingresar todos los datos del Cliente");
+
+    private FachadaCliente fachada = new FachadaCliente();
+
+    private void crearCli() throws ClienteNoValidoException {
+        if (!campoLimpio()) {
+
+            Cliente c = new Cliente();
+            c.setApellido(apellidoCli.getText());
+            c.setDirecc(direcCli.getText());
+            try {
+                c.setDocumento(Integer.parseInt(cedulaCli.getText()));
+                c.setNumCel(Integer.parseInt(celuCli.getText()));
+            } catch (NumberFormatException e) {
+                jLabelError.setText("Debe ingresar un Número de telefono o C.I valida");
+            }
+            c.setEmail(emailCle.getText());
+            c.setNombre(nombreCli.getText());
+            fachada.FachaClienteAgregar(c);
+            try {
+
+            } catch (NullPointerException e) {
+                jLabelError.setText("Debe ingresar todos los datos del Cliente");
+            }
+            try {
+//            
+                this.fachada.FachaClienteAgregar(c);
+                JOptionPane.showMessageDialog(this, "Se creó el cliente: " + c.getNombre());
+                limpiarCampos();
+//            }
+            } catch (ClienteNoValidoException ex) {
+                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Debe rellenar todos los campos");
         }
     }
 
-    
+    private Boolean campoLimpio() {
+        Boolean ret = false;
+        if (nombreCli.getText().equalsIgnoreCase("") || apellidoCli.getText().equalsIgnoreCase("")
+                || cedulaCli.getText().equalsIgnoreCase("") || celuCli.getText().equalsIgnoreCase("")
+                || direcCli.getText().equalsIgnoreCase("") || emailCle.getText().equalsIgnoreCase("")) {
+            ret = true;
+        }
+        return ret;
+    }
     private void jBotonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotonCrearActionPerformed
-        crearCli();
+        try {
+            crearCli();
+        } catch (ClienteNoValidoException ex) {
+            Logger.getLogger(RegistroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         limpiarCampos();
     }//GEN-LAST:event_jBotonCrearActionPerformed
 
     private void jBotonCrearKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jBotonCrearKeyPressed
-        crearCli();
+        try {
+            crearCli();
+        } catch (ClienteNoValidoException ex) {
+            Logger.getLogger(RegistroCliente.class.getName()).log(Level.SEVERE, null, ex);
+        }
         limpiarCampos();
         //event for keyPressed on jFrame?
     }//GEN-LAST:event_jBotonCrearKeyPressed
@@ -209,11 +238,12 @@ public class RegistroCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu1MouseClicked
 
     private void limpiarCampos() {
-           apellidoCli.setText(null);
-           cedulaCli.setText(null);
-           celuCli.setText(null);
-           direcCli.setText(null);
-           emailCle.setText(null);
+        nombreCli.setText(null);
+        apellidoCli.setText(null);
+        cedulaCli.setText(null);
+        celuCli.setText(null);
+        direcCli.setText(null);
+        emailCle.setText(null);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -232,7 +262,6 @@ public class RegistroCliente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelError;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JTextField nombreCli;
     // End of variables declaration//GEN-END:variables
