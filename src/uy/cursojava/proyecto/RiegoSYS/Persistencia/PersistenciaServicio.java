@@ -67,14 +67,13 @@ public class PersistenciaServicio {
             //convertir la fecha de String a Date
             String fechaSer = servicio.getFecha();
 
-            /*
-            String fechaSerAux = servicio.getFecha();           
             // 2022-12-04
             // "01/12/2022"
+            /*
+             String fechaSerAux = servicio.getFecha();
             String[] vec = fechaSerAux.split("-");
-            String fechaSer = vec[2]+"/"+vec[1]+"/"+vec[0];
-            */
-            
+            String fechaSer = vec[2] + "/" + vec[1] + "/" + vec[0];
+             */
             SimpleDateFormat format = new SimpleDateFormat("yyyy-mm-dd");
             Date parsed = format.parse(fechaSer);
             java.sql.Date sqlFecha = new java.sql.Date(parsed.getTime());
